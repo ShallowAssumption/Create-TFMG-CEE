@@ -1,0 +1,33 @@
+# Roadmap
+Crossed out features are features that have been removed due to overlap, or lack of functionality, usually due to other removals.
+
+- [|] ~~Cables~~
+- [ ] Electronics
+  - [|] ~~Configuration Wrench~~
+  - [|] ~~Generators~~
+  - [|] ~~Electric Pump~~
+  - [|] ~~Electric Motor~~
+  - [|] ~~Electric Gauges~~
+  - [|] ~~Transformer~~
+  - [|] ~~Large Transformer~~
+  - [|] ~~Diode~~
+  - [|] ~~Electric Switch~~
+  - [|] ~~Potentiometer~~
+  - [|] ~~Resistor~~
+  - [|] ~~Voltage Observer~~
+  - [ ] Lights
+    - [|] ~~Light Bulb~~
+    - [|] Circular Light
+    - [|] Modern Light
+    - [|] Aluminum Lamp
+    - [ ] Neon Tube
+  - [ ] Accumulators
+  - [ ] Large Electric Switch
+  - [ ] Capacitors (may be removed)
+  - [ ] Multimeters
+  - [|] Polarizer
+  - [ ] Segmented Display
+  - [X] Traffic Light
+- [X] Vat Machines
+  - [X] Electrode Holder
+  - [X] Freezer

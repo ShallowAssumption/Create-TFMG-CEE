@@ -10,8 +10,10 @@ import com.drmangotea.tfmg.content.machinery.vat.base.registry.operations.VatOpe
 import com.drmangotea.tfmg.content.machinery.vat.base.registry.types.VatType;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.mode.MixerMode;
+import com.george_vi.electroenergetics.devices.device.SimulatedDeviceType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class TFMGRegistries {
     public static final ResourceKey<Registry<FlamethrowerFuelType>> FLAMETHROWER_FUEL_TYPE = createRegistryKey("fuel_type/flamethrower");
     public static final ResourceKey<Registry<EngineFuelType>> ENGINE_FUEL_TYPE = createRegistryKey("fuel_type/engine");
     public static final ResourceKey<Registry<FireExtinguisherFuelType>> FIRE_EXTINGUISHER_FUEL_TYPE = createRegistryKey("fuel_type/fire_extinguisher");
+	public static final ResourceKey<Registry<SimulatedDeviceType<?>>> SIMULATED_DEVICE_TYPE = createRegistryKey("simulated_device_types");
 
     public static final Registry<VatOperation> VAT_OPERATION_REGISTRY = makeSyncedRegistry(VAT_OPERATION);
     public static final Registry<CableType> CABLE_TYPE_REGISTRY = makeSyncedRegistry(CABLE_TYPE);
@@ -39,6 +42,12 @@ public class TFMGRegistries {
     public static final Registry<MixerMode> MIXER_MODE_REGISTRY = makeSyncedRegistry(MIXER_MODE);
     public static final Registry<VatType> VAT_TYPE_REGISTRY = makeSyncedRegistry(VAT_TYPE);
     public static final Registry<EngineUpgrade> ENGINE_UPGRADE_REGISTRY = makeSyncedRegistry(ENGINE_UPGRADE);
+	public static final Registry<SimulatedDeviceType<?>> SIMULATED_DEVICE_TYPE_REGISTRY = new RegistryBuilder<>(SIMULATED_DEVICE_TYPE)
+		.sync(false)
+		.onAdd(((registry, id, key, value) -> {for (Block block : value.validBlocks()) {
+			SimulatedDeviceType.BY_BLOCK.put(block, value);
+		}})).create();
+
 
     private static <T> ResourceKey<Registry<T>> createRegistryKey(String name) {
         return ResourceKey.createRegistryKey(TFMG.asResource(name));

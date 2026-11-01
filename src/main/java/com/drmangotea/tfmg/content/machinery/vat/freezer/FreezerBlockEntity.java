@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.machinery.vat.freezer;
 
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.cee_base.CEEElectricBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.IVatMachine;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
@@ -18,7 +18,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class FreezerBlockEntity extends ElectricBlockEntity implements IVatMachine {
+public class FreezerBlockEntity extends CEEElectricBlockEntity implements IVatMachine {
 
     public boolean updateVat = false;
     public FreezerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -36,18 +36,8 @@ public class FreezerBlockEntity extends ElectricBlockEntity implements IVatMachi
         }
     }
 
-    @Override
-    public int getMaxVoltage() {
-        return 20000;
-    }
-
-    @Override
-    public int getMaxCurrent() {
-        return 400;
-    }
-
-    public boolean isOperational(){
-        return getCurrent() >= TFMGConfigs.common().machines.freezerMinimumCurrent.get() && canWork();
+    public boolean isOperational() {
+        return amperage >= TFMGConfigs.common().machines.freezerMinimumCurrent.get();
     }
 
     @Override
@@ -67,7 +57,7 @@ public class FreezerBlockEntity extends ElectricBlockEntity implements IVatMachi
 
     @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        boolean operational = getCurrent() >= TFMGConfigs.common().machines.freezerMinimumCurrent.get();
+        boolean operational = amperage >= TFMGConfigs.common().machines.freezerMinimumCurrent.get();
         TFMGTexts.CommonMachines.state("goggles." + (operational ? "operational" : "not_operational")).style(operational ? ChatFormatting.GREEN : ChatFormatting.RED).forGoggles(tooltip);
         if (!operational)
             TFMGTexts.Multimeter.notEnoughCurrent(TFMGConfigs.common().machines.freezerMinimumCurrent.get()).forGoggles(tooltip);
@@ -75,15 +65,8 @@ public class FreezerBlockEntity extends ElectricBlockEntity implements IVatMachi
         return true;
     }
 
-    @Override
     public float resistance() {
         return 75;
-    }
-
-    @Override
-    public void onNetworkChanged(int oldVoltage, float oldPower) {
-        super.onNetworkChanged(oldVoltage, oldPower);
-        this.updateVat = true;
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.drmangotea.tfmg.content.machinery.vat.electrode_holder;
 import com.drmangotea.tfmg.TFMGRegistries;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
 import com.drmangotea.tfmg.config.TFMGConfigs;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.cee_base.CEEElectricBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.IVatMachine;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlock;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
@@ -32,7 +32,7 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import java.util.List;
 
-public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements IVatMachine, Clearable {
+public class ElectrodeHolderBlockEntity extends CEEElectricBlockEntity implements IVatMachine, Clearable {
     public SmartInventory inventory = new SmartInventory(1, this, 1, false)
             .whenContentsChanged(this::onInventoryChanged);
     public IItemHandlerModifiable itemCapability;
@@ -67,24 +67,9 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
     }
 
     @Override
-    public int getMaxVoltage() {
-        return 20000;
-    }
-
-    @Override
-    public int getMaxCurrent() {
-        return 400;
-    }
-
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
-        return direction == Direction.UP;
-    }
-
-    @Override
     public boolean makeMultimeterTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        boolean operational = getCurrent() >= TFMGConfigs.common().machines.electrolysisMinimumCurrent.get();
-        TFMGTexts.CommonMachines.state("goggles." + (operational && canWork() ? "operational" : "not_operational")).style(operational ? ChatFormatting.GREEN : ChatFormatting.RED).forGoggles(tooltip);
+        boolean operational = amperage >= TFMGConfigs.common().machines.electrolysisMinimumCurrent.get();
+        TFMGTexts.CommonMachines.state("goggles." + (operational ? "operational" : "not_operational")).style(operational ? ChatFormatting.GREEN : ChatFormatting.RED).forGoggles(tooltip);
         if (!operational)
             TFMGTexts.Multimeter.notEnoughCurrent(TFMGConfigs.common().machines.electrolysisMinimumCurrent.get()).forGoggles(tooltip);
         super.makeMultimeterTooltip(tooltip, isPlayerSneaking);
@@ -106,7 +91,6 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
         }
     }
 
-    @Override
     public float resistance() {
         return this.electrode.getResistance();
     }
@@ -115,8 +99,8 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
         if (electrode != null) {
 			this.electrode = electrode;
 		}
-        if (hasLevel())
-            VatBlock.updateVatState(getBlockState(), getLevel(), getBlockPos().relative(Direction.DOWN));
+        if (level != null)
+            VatBlock.updateVatState(getBlockState(), level, getBlockPos().relative(Direction.DOWN));
         sendData();
 	}
 
@@ -127,14 +111,8 @@ public class ElectrodeHolderBlockEntity extends ElectricBlockEntity implements I
         ItemHelper.dropContents(level, worldPosition, inventory);
     }
 
-    @Override
-    public void onNetworkChanged(int oldVoltage, float oldPower) {
-        super.onNetworkChanged(oldVoltage, oldPower);
-        this.updateVat = true;
-    }
-
-    boolean isOperational() {
-        return getCurrent() >= TFMGConfigs.common().machines.electrolysisMinimumCurrent.get() && canWork();
+    public boolean isOperational() {
+        return amperage >= TFMGConfigs.common().machines.electrolysisMinimumCurrent.get();
     }
 
     @Override

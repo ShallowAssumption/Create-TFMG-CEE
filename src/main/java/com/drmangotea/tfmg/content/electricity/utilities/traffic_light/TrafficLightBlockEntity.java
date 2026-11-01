@@ -1,13 +1,11 @@
 package com.drmangotea.tfmg.content.electricity.utilities.traffic_light;
 
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.cee_base.CEEElectricBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,18 +13,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class TrafficLightBlockEntity extends ElectricBlockEntity {
+public class TrafficLightBlockEntity extends CEEElectricBlockEntity {
+	protected ScrollValueBehaviour timerLength;
+	public LerpedFloat glow = LerpedFloat.linear();
+	LightPos light = LightPos.RED;
+	public int timer = 180;
 
-    protected ScrollValueBehaviour timerLength;
-
-    public LerpedFloat glow = LerpedFloat.linear();
-
-    LightPos light = LightPos.RED;
-
-    public int timer = 180;
-    public TrafficLightBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
-    }
+	public TrafficLightBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
+	}
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
@@ -46,38 +41,29 @@ public class TrafficLightBlockEntity extends ElectricBlockEntity {
         return (value / 20 / 60) + "m";
     }
 
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
-        return direction.getAxis().isVertical();
-    }
-
-    @Override
-    public float resistance() {
-        return 175;
-    }
+	@Override
+	public boolean isOperational() { return voltage>0&&amperage>0; }
+	//TODO: figure out how to make this work with the renderer.
+	// Moving the logic to the device ain't enough.
 
     @Override
     public void tick() {
         if (level == null) return;
         super.tick();
 
-        if(!level.isClientSide)
-            return;
-        if(timer > 0) {
-            timer--;
-        }
-
-        glow.chase(200f,0.4, LerpedFloat.Chaser.EXP);
-
+		if(!level.isClientSide) return;
+		if(timer>0) { timer--; }
+		
         int halfTimer = timerLength.getValue() / 2;
+		int eighth = Math.min(30, halfTimer / 4);
 
-        if(timer < halfTimer - Math.min(30, halfTimer / 4) && timer > Math.min(60, halfTimer / 4)) {
-            light = LightPos.GREEN;
-        } else if (timer > halfTimer + Math.min(30, halfTimer / 4)) {
-            light = LightPos.RED;
-        } else {
-            light = LightPos.AMBER;
-        }
+		if (timer < halfTimer - eighth && timer > Math.min(60, halfTimer / 4)) {
+			light = LightPos.GREEN;
+		} else if (timer > halfTimer + eighth) {
+			light = LightPos.RED;
+		} else {
+			light = LightPos.AMBER;
+		}
 
         if(timer == 0){
             glow.setValue(0);

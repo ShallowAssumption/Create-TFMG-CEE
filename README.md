@@ -1,57 +1,29 @@
 <div align="center">
   <img src="https://cdn.modrinth.com/data/hC1xYvnS/d3a8fb2ed43776c214a33bff66837939d7123d5c_96.webp">
-  <h1>Create: TFMG Community Edition</h1>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/tfmg-community-edition"><picture><source srcset="https://img.shields.io/badge/CurseForge-202830?style=for-the-badge&logo=curseforge" media="(prefers-color-scheme: dark)"><img src="https://img.shields.io/badge/CurseForge-white?style=for-the-badge&logo=curseforge" alt="CurseForge"></picture></a>
-  <a href="https://modrinth.com/mod/tfmg-community-edition"><picture><source srcset="https://img.shields.io/badge/Modrinth-202830?style=for-the-badge&logo=modrinth" media="(prefers-color-scheme: dark)"><img src="https://img.shields.io/badge/Modrinth-white?style=for-the-badge&logo=modrinth" alt="Modrinth"></picture></a>
-  <a href="https://discord.gg/4yx2D6XRKf"><picture><source srcset="https://img.shields.io/badge/Discord-202830?style=for-the-badge&logo=discord" media="(prefers-color-scheme: dark)"><img src="https://img.shields.io/badge/Discord-white?style=for-the-badge&logo=discord" alt="Discord"></picture></a>
-  <br>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/graphs/contributors"><picture><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Metallurgists-of-Create/Create-TFMG-CE"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/stargazers"><picture><img alt="Stars" src="https://img.shields.io/github/stars/Metallurgists-of-Create/Create-TFMG-CE?style=flat"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/releases/latest"><picture><img alt="Latest Release" src="https://img.shields.io/github/v/release/Metallurgists-of-Create/Create-TFMG-CE"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/releases/latest"><picture><img alt="Total GitHub Downloads" src="https://img.shields.io/github/downloads/Metallurgists-of-Create/Create-TFMG-CE/total"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/commits/"><picture><img alt="Commit activity" src="https://img.shields.io/github/commit-activity/t/Metallurgists-of-Create/Create-TFMG-CE"></picture></a>
-  <br>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/issues"><picture><img alt="Open Issues" src="https://img.shields.io/github/issues-raw/Metallurgists-of-Create/Create-TFMG-CE"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/issues?q=is%3Aissue+state%3Aclosed"><picture><img alt="Closed Issues" src="https://img.shields.io/github/issues-closed-raw/Metallurgists-of-Create/Create-TFMG-CE"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/pulls"><picture><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr-raw/Metallurgists-of-Create/Create-TFMG-CE"></picture></a>
-  <a href="https://github.com/Metallurgists-of-Create/Create-TFMG-CE/pulls?q=is%3Apr+state%3Aclosed"><picture><img alt="Closed Pull Requests" src="https://img.shields.io/github/issues-pr-closed-raw/Metallurgists-Of-Create/Create-TFMG-CE"></picture></a>
+  <h1>Create: TFMG, CEE Edition</h1>
   <br>
   <a>Heavy Engineering & Oil For The Create Mod</a>
 </div>
 
 <br>
 
-## Info
+## What is This?
 
-Create is by default a steam/clockpunk mod and most addons aim to expand this part of Create and do that pretty well,
-we thought the next natural expansion would be moving on from steampunk to dieselpunk.
-We believe that create could be later used not just as a single steampunk tech mod,
-but due to its modularity and polishedness, it is a perfect base for other tech mods aiming to Create (get it) something new with it,
-essentially using it as a library.
-We wanna be the first ones to try and prove this concept.
+A fork of [Create: TFMG CE](https://github.com/Metallurgists-of-Create/Create-TFMG-CE), replacing TFMG's electric system with deep integration with [Create Electro Energistics](https://github.com/george8188625/Create-Electro-Energetics/). Effectivley, it turns TFMG into a CEE addon. **This will not work without CEE installed**.
 
-For Documentation see [Metallurgists of Create docs](https://metallurgists-of-create.github.io/tfmg/)
+>[!WARNING]
+> THESE ARE BREAKING CHANGES!
+>
+> Expect removed content to get voided!
 
-<br>
+## FAQ
 
-## Features
+### CEE v1.2.0?
+Dev builds can be found on the CEE github page. If you don't want to use preview builds, you should wait on this fork.
 
-* Large Distilleries
-* Realistic Electricity
-* Steel Mills
-* Concrete
-* Electrolyzers
-* Steel
-* Aluminum
-* Cast Iron
-* Lead
-* Sulfur
-* OIL!!!
-* Quad Potato Cannon
-* Flamethrowers
-* And more..
+### Create: Power Grid compatibility?
+CPG has compatiblity with regular TFMG-CE. The current implementation of TFMG-CEE does not maintain that compatibility, but that compatibility may return at a later date.
 
-<br>
-
-![refinery image](https://cdn.modrinth.com/data/USgVjXsk/images/16f8c83fbec919fdc571236d62434b2d8050cf11.png)
-
+## Building from Source
+Since this addon is developed in anticipation of version 1.2.0 of CEE, it compiles based on a local file rather than a maven.
+The path it looks for is `../jars/electroenergetics-${cee_version}.jar`, which to be clear is a folder called `jars` outside of the project folder. Either replicate that setup, or change the path in the `build.gradle`.

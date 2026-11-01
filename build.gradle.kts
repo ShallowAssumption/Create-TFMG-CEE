@@ -133,6 +133,8 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${property("minecraft_version")}:${property("flywheel_version")}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${property("minecraft_version")}:${property("flywheel_version")}")
 
+    implementation(files("../jars/electroenergetics-${property("cee_version")}.jar"))
+
     implementation("mezz.jei:jei-${property("minecraft_version")}-neoforge:${property("jei_version")}")
     implementation("com.tterrag.registrate:Registrate:${property("registrate_version")}")
 

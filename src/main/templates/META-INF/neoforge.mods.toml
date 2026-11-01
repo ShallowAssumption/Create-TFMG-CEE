@@ -40,6 +40,11 @@ file="META-INF/accesstransformer.cfg"
 
 # Optional/Extra compat
 [[dependencies."${mod_id}"]]
+    modId = "electroenergetics"
+    type = "required"
+    versionRange = "[1.2.0,)"
+    side = "BOTH"
+[[dependencies."${mod_id}"]]
     modId = "jei"
     type = "optional"
     versionRange = "[{jei_version},)"
