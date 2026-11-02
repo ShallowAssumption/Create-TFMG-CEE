@@ -235,9 +235,6 @@ public class TFMGRecipeProvider extends RecipeProvider {
         public static ItemLike experienceNugget() {
             return AllItems.EXP_NUGGET.get();
         }
-        public static ItemLike capacitor() {
-            return TFMGItems.CAPACITOR;
-        }
         public static ItemLike copperSulfate() {
             return TFMGItems.COPPER_SULFATE.get();
         }

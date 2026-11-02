@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.electricity.utilities.traffic_light;
 
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.content.electricity.cee_base.TFMGHorizontalDirectionalDeviceBlock;
+import com.drmangotea.tfmg.content.electricity.cee_base.blocks.TFMGHorizontalDirectionalDeviceBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGSimulatedDevices;
 import com.george_vi.electroenergetics.devices.device.SimulatedDeviceType;

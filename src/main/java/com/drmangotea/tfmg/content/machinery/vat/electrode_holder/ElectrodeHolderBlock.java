@@ -2,7 +2,7 @@ package com.drmangotea.tfmg.content.machinery.vat.electrode_holder;
 
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.content.electricity.cee_base.TFMGDeviceBlock;
+import com.drmangotea.tfmg.content.electricity.cee_base.blocks.TFMGDeviceBlock;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.electrode.Electrode;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;

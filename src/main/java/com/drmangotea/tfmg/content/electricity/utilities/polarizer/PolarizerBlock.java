@@ -3,11 +3,13 @@ package com.drmangotea.tfmg.content.electricity.utilities.polarizer;
 import com.drmangotea.tfmg.base.TFMGShapes;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
+import com.drmangotea.tfmg.content.electricity.cee_base.blocks.TFMGHorizontalDirectionalDeviceBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
+import com.drmangotea.tfmg.registry.TFMGSimulatedDevices;
+import com.george_vi.electroenergetics.devices.device.SimulatedDeviceType;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,12 +19,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.Map;
+
+import static com.drmangotea.tfmg.content.electricity.cee_base.TFMGNodeConfigurations.POLARIZER;
 
 @NothingNullByDefault
-public class PolarizerBlock extends TFMGHorizontalDirectionalBlock implements IBE<PolarizerBlockEntity> {
+public class PolarizerBlock extends TFMGHorizontalDirectionalDeviceBlock<PolarizerDevice, PolarizerBlockEntity> {
     public PolarizerBlock(Properties p_54120_) {
         super(p_54120_);
     }
@@ -69,12 +75,6 @@ public class PolarizerBlock extends TFMGHorizontalDirectionalBlock implements IB
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-
-    @Override
-    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
-    }
-
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         IBE.onRemove(state, level, pos, newState);
@@ -93,4 +93,12 @@ public class PolarizerBlock extends TFMGHorizontalDirectionalBlock implements IB
     public BlockEntityType<? extends PolarizerBlockEntity> getBlockEntityType() {
         return TFMGBlockEntities.POLARIZER.get();
     }
+	
+	//CEE stuff
+	@Override
+	public Vec3 getNodePosition(Level level, BlockPos pos, BlockState state, int id) { return POLARIZER.rotate(facingToRot(state)).getNodePos(Direction.DOWN, id); }
+	@Override
+	public Map<Integer, Vec3> getNodePositions(Level level, BlockPos pos, BlockState state) { return POLARIZER.rotate(facingToRot(state)).getNodes(Direction.DOWN);}
+	@Override
+	public SimulatedDeviceType<PolarizerDevice> getDevice() { return TFMGSimulatedDevices.POLARIZER.get(); }
 }

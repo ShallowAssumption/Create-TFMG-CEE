@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.electricity.utilities.polarizer;
 
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
-import com.drmangotea.tfmg.content.electricity.base.ElectricBlockEntity;
+import com.drmangotea.tfmg.content.electricity.cee_base.CEEElectricBlockEntity;
 import com.drmangotea.tfmg.recipes.PolarizingRecipe;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.simibubi.create.foundation.item.ItemHelper;
@@ -9,7 +9,6 @@ import com.simibubi.create.foundation.item.SmartInventory;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -27,9 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
-
-public class PolarizerBlockEntity extends ElectricBlockEntity implements Clearable {
+public class PolarizerBlockEntity extends CEEElectricBlockEntity implements Clearable {
     public SmartInventory inventory = new LetMeKeepMyItemSmartInventory(1, this).forbidExtraction().whenContentsChanged(this::onInventoryChanged);
     public SmartInventory outputInventory = new SmartInventory(1, this, 1, false).forbidInsertion().whenContentsChanged(this::onInventoryChanged);
 
@@ -37,6 +34,7 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements Clearab
     public PolarizingRecipe recipe;
     LerpedFloat angle = LerpedFloat.angular();
 
+	//TODO: Replace with actual capacitor properties
     public boolean chargeCapacitors = false;
     public int capacitorPercentage = 0;
 
@@ -44,6 +42,11 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements Clearab
         super(type, pos, state);
         itemCapability = new CombinedInvWrapper(inventory, outputInventory);
     }
+	
+	@Override
+	public boolean isOperational() {
+		return true;
+	}
 
     public ItemStack getInputItem() {
         return inventory.getStackInSlot(0);
@@ -61,21 +64,14 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements Clearab
         );
     }
 
-    @Override
-    public boolean hasElectricitySlot(Direction direction) {
-        return direction == getBlockState().getValue(FACING).getOpposite();
-    }
-
     public void onInventoryChanged(int count) {
         if (level == null) return;
         sendData();
         setChanged();
-        level.invalidateCapabilities(this.getPos());
         if (inventory.isEmpty()) {
             chargeCapacitors = false;
             recipe = null;
             capacitorPercentage = 0;
-            updateNextTick();
             return;
         }
         ItemStack itemStack = inventory.getItem(0);
@@ -83,18 +79,15 @@ public class PolarizerBlockEntity extends ElectricBlockEntity implements Clearab
         if (recipe.isPresent()) {
             this.recipe = recipe.get();
             chargeCapacitors = true;
-            updateNextTick();
             if (capacitorPercentage >= 200) {
                 performRecipe(recipe.get());
             }
         } else {
             chargeCapacitors = false;
             this.recipe = null;
-            updateNextTick();
         }
     }
 
-    @Override
     public float resistance() {
         return chargeCapacitors ? 30 : 0;
     }

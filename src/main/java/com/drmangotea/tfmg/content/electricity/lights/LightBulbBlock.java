@@ -1,9 +1,10 @@
 package com.drmangotea.tfmg.content.electricity.lights;
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.base.blocks.WallMountBlock;
-import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.drmangotea.tfmg.content.electricity.cee_base.TFMGNodeConfigurations;
+import com.drmangotea.tfmg.content.electricity.cee_base.blocks.WallMountDeviceBlock;
+import com.drmangotea.tfmg.registry.TFMGSimulatedDevices;
+import com.george_vi.electroenergetics.devices.device.SimulatedDeviceType;
 import com.simibubi.create.foundation.block.IBE;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.createmod.catnip.math.VoxelShaper;
@@ -30,12 +31,15 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 
 @NothingNullByDefault
-public class LightBulbBlock extends WallMountBlock implements IBE<LightBulbBlockEntity>, SimpleWaterloggedBlock, IWrenchable {
+public class LightBulbBlock extends WallMountDeviceBlock<LightBulbDevice, LightBulbBlockEntity> implements SimpleWaterloggedBlock {
     public static final IntegerProperty LIGHT = BlockStateProperties.LEVEL;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public final BlockEntityEntry<? extends LightBulbBlockEntity> blockEntityType;
@@ -46,11 +50,6 @@ public class LightBulbBlock extends WallMountBlock implements IBE<LightBulbBlock
         this.registerDefaultState(this.stateDefinition.any().setValue(LIGHT, 0).setValue(WATERLOGGED, false));
         this.blockEntityType = blockEntityType;
         this.shape = shape;
-    }
-
-    @Override
-    public void onPlace(BlockState pState, Level level, BlockPos pos, BlockState pOldState, boolean pIsMoving) {
-        withBlockEntityDo(level,pos, IElectric::onPlaced);
     }
 	
     @Override
@@ -102,4 +101,16 @@ public class LightBulbBlock extends WallMountBlock implements IBE<LightBulbBlock
     public BlockEntityType<? extends LightBulbBlockEntity> getBlockEntityType() {
         return blockEntityType.get();
     }
+	
+	//CEE stuff
+	@Override
+	public Map<Integer, Vec3> getNodePositions(Level level, BlockPos pos, BlockState state) {
+		return TFMGNodeConfigurations.LIGHT.getNodes(state.getValue(FACING));
+	}
+	@Override
+	public @Nullable Vec3 getNodePosition(Level level, BlockPos pos, BlockState state, int id) {
+		return TFMGNodeConfigurations.LIGHT.getNodePos(state.getValue(FACING), id);
+	}
+	@Override
+	public SimulatedDeviceType<LightBulbDevice> getDevice() { return TFMGSimulatedDevices.LIGHT.get(); }
 }

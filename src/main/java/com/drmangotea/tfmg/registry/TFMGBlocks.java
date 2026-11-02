@@ -23,7 +23,6 @@ import com.drmangotea.tfmg.content.decoration.tanks.cast_iron.CastIronTankItem;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankModel;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankItem;
-import com.drmangotea.tfmg.content.electricity.generators.creative_generator.CreativeGeneratorBlock;
 import com.drmangotea.tfmg.content.electricity.lights.LampGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
@@ -915,13 +914,6 @@ public class TFMGBlocks {
 
     //------------------ELECTRICITY------------------//
 
-    public static final BlockEntry<CreativeGeneratorBlock> CREATIVE_GENERATOR = REGISTRATE.block("creative_generator", CreativeGeneratorBlock::new)
-            .initialProperties(SharedProperties::softMetal)
-            .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
-            .transform(pickaxeOnly())
-            .simpleItem()
-            .register();
-
     public static final BlockEntry<AccumulatorBlock> ACCUMULATOR =
             REGISTRATE.block("accumulator", AccumulatorBlock::new)
                     .initialProperties(SharedProperties::softMetal)
@@ -940,8 +932,8 @@ public class TFMGBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
+					.lang("Low Voltage Light Bulb")
+                    .item().transform(customItemModel())
                     .register();
     public static final BlockEntry<LightBulbBlock> CIRCULAR_LIGHT =
             REGISTRATE.block("circular_light", p -> new LightBulbBlock(p, TFMGBlockEntities.CIRCULAR_LIGHT, TFMGShapes.CIRCULAR_LIGHT))

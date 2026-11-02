@@ -143,7 +143,6 @@ public class TFMGItems {
             ETCHED_CIRCUIT_BOARD = REGISTRATE.item("etched_circuit_board", Item::new).register(),
             CIRCUIT_BOARD = REGISTRATE.item("circuit_board", Item::new).register(),
             TRANSISTOR = REGISTRATE.item("transistor", Item::new).register(),
-            CAPACITOR = REGISTRATE.item("capacitor", Item::new).register(),
             COPPER_SULFATE = REGISTRATE.item("copper_sulfate", Item::new).register(),
             LITHIUM_CHARGE = REGISTRATE.item("lithium_charge", Item::new).register(),
 
@@ -275,10 +274,6 @@ public class TFMGItems {
 			.tag(Items.MULTIMETERS.tag, Items.CURIOS_BELT.tag).register();
 
     public static final ItemEntry<SequencedAssemblyItem>
-            UNFINISHED_POTENTIOMETER = sequencedIngredient("unfinished_potentiometer", "block/potentiometer/unfinished"),
-            UNFINISHED_ELECTRIC_MOTOR = sequencedIngredient("unfinished_electric_motor", "block/electric_motor/unfinished"),
-            UNFINISHED_HEAVY_ELECTRIC_MOTOR = sequencedIngredient("unfinished_heavy_electric_motor", "block/heavy_electric_motor/unfinished"),
-            UNFINISHED_GENERATOR = sequencedIngredient("unfinished_generator", "item/unfinished_generator_model"),
             UNFINISHED_STEEL_MECHANISM = sequencedIngredient("unfinished_steel_mechanism"),
             UNFINISHED_TRANSISTOR = sequencedIngredient("unfinished_transistor"),
             UNFINISHED_CAPACITOR = sequencedIngredient("unfinished_capacitor"),

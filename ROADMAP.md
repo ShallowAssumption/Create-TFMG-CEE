@@ -16,16 +16,16 @@ Crossed out features are features that have been removed due to overlap, or lack
   - [X] ~~Resistor~~
   - [X] ~~Voltage Observer~~
   - [ ] Lights
-    - [|] ~~Light Bulb~~
-    - [|] Circular Light
-    - [|] Modern Light
-    - [|] Aluminum Lamp
+    - [X] Light Bulb (→ Low Voltage Light Bulb)
+    - [X] Circular Light
+    - [X] Modern Light
+    - [X] Aluminum Lamp
     - [ ] Neon Tube
   - [ ] Accumulators
   - [ ] Large Electric Switch
-  - [ ] Capacitors (may be removed)
+  - [X] ~~Capacitors~~
   - [ ] Multimeters
-  - [|] Polarizer
+  - [X] Polarizer (Functional, but still WIP)
   - [ ] Segmented Display
   - [X] Traffic Light
 - [X] Vat Machines

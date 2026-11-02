@@ -11,7 +11,6 @@ import net.neoforged.neoforge.event.entity.EntityStruckByLightningEvent;
 
 import java.util.Optional;
 
-
 @EventBusSubscriber
 public class PolarizeByLightningEvent {
 

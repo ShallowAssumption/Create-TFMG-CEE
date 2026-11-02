@@ -638,15 +638,15 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("TTT")
                     .pattern("MHM")),
 
-    POLARIZER = create(TFMGBlocks.POLARIZER)
+    POLARIZER = create(TFMGBlocks.POLARIZER) //TODO: Review the whole reciple honestly
             .unlockedBy(TFMGBlocks.STEEL_CASING::get)
             .viaShaped(b -> b
                     .define('B', brassSheet())
                     .define('W', copperWire())
-                    .define('V', TFMGBlocks.HEAVY_MACHINERY_CASING) //TODO: Review
+                    .define('V', TFMGBlocks.HEAVY_MACHINERY_CASING) //
                     .define('S', steelCasing())
-                    .define('R', CEEBlocks.RESISTOR) //TODO: Review
-                    .define('C', capacitor())
+                    .define('R', CEEBlocks.RESISTOR) //
+                    .define('C', CEEBlocks.CAPACITOR) //
                     .pattern("BWB")
                     .pattern("CVC")
                     .pattern("RSR")),

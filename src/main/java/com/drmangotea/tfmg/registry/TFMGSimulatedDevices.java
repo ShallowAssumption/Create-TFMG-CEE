@@ -1,10 +1,8 @@
 package com.drmangotea.tfmg.registry;
 
 import com.drmangotea.tfmg.TFMG;
-/*import com.drmangotea.tfmg.content.electricity.lights.LightBulbDevice;
-import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchDevice;
-import com.drmangotea.tfmg.content.electricity.storage.AccumulatorDevice;
-import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerDevice;*/
+import com.drmangotea.tfmg.content.electricity.lights.LightBulbDevice;
+import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerDevice;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightDevice;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderDevice;
 import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerDevice;
@@ -22,6 +20,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static com.drmangotea.tfmg.TFMGRegistries.SIMULATED_DEVICE_TYPE_REGISTRY;
 
+/*import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchDevice;
+import com.drmangotea.tfmg.content.electricity.storage.AccumulatorDevice;*/
 public class TFMGSimulatedDevices {
 	private static final DeferredRegister<SimulatedDeviceType<?>>
 		DEVICES = DeferredRegister.create(SIMULATED_DEVICE_TYPE_REGISTRY, TFMG.MOD_ID);
@@ -36,7 +36,7 @@ public class TFMGSimulatedDevices {
 		TRAFFIC_LIGHT = device("traffic_light", TrafficLightDevice::new);
 	
 	/*public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<AccumulatorDevice>>
-		ACCUMULATOR = device("accumulator", AccumulatorDevice::new);
+		ACCUMULATOR = device("accumulator", AccumulatorDevice::new);*/
 		
 	public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<LightBulbDevice>>
 		LIGHT = device("light_bulb", LightBulbDevice::new);
@@ -44,7 +44,7 @@ public class TFMGSimulatedDevices {
 	public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<PolarizerDevice>>
 		POLARIZER = device("polarizer", PolarizerDevice::new);
 	
-	public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<LargeSwitchDevice>>
+	/*public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<LargeSwitchDevice>>
 		LARGE_SWITCH = device("large_switch", LargeSwitchDevice::new);*/
 	
 	static <T extends SimulatedDevice> DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<T>> device (

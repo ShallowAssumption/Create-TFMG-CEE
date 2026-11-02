@@ -1,7 +1,7 @@
-package com.drmangotea.tfmg.content.electricity.cee_base;
+package com.drmangotea.tfmg.content.electricity.cee_base.blocks;
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
+import com.drmangotea.tfmg.base.blocks.TFMGHorizontalDirectionalBlock;
 import com.george_vi.electroenergetics.devices.device.SimulatedDevice;
 import com.george_vi.electroenergetics.foundation.device.ElectricalDeviceBlock;
 import com.george_vi.electroenergetics.foundation.nodes.InWorldNodeConnection;
@@ -19,14 +19,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.ticks.LevelTickAccess;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @NothingNullByDefault
-public abstract class TFMGDirectionalDeviceBlock<T extends SimulatedDevice, R extends BlockEntity> extends TFMGDirectionalBlock implements ElectricalDeviceBlock<T>, IBE<R>, IWrenchable {
-	public TFMGDirectionalDeviceBlock(Properties properties) { super(properties); }
+public abstract class TFMGHorizontalDirectionalDeviceBlock<T extends SimulatedDevice, R extends BlockEntity> extends TFMGHorizontalDirectionalBlock implements ElectricalDeviceBlock<T>, IBE<R>, IWrenchable {
+	public TFMGHorizontalDirectionalDeviceBlock(Properties properties) { super(properties); }
 	
 	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
 		super.onPlace(state, level, pos, oldState, movedByPiston);
@@ -59,4 +60,12 @@ public abstract class TFMGDirectionalDeviceBlock<T extends SimulatedDevice, R ex
 		this.removeWiresByPlayer(context.getPlayer(), context.getLevel(), context.getClickedPos());
 		return IWrenchable.super.onSneakWrenched(state, context);
 	}
+	
+	public Vec3 facingToRot (BlockState state) { return switch (state.getValue(FACING)) {
+		case UP, DOWN -> throw new IllegalStateException("HorizontalDirectionalDeviceBlock with vertical facing!");
+		case NORTH -> new Vec3(0,0,0);
+		case EAST -> new Vec3 (0,90,0);
+		case SOUTH -> new Vec3(0,180,0);
+		case WEST -> new Vec3 (0,270,0);
+	}; }
 }

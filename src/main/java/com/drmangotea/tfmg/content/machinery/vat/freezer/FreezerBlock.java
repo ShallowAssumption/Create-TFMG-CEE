@@ -1,7 +1,7 @@
 package com.drmangotea.tfmg.content.machinery.vat.freezer;
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.content.electricity.cee_base.TFMGDeviceBlock;
+import com.drmangotea.tfmg.content.electricity.cee_base.blocks.TFMGDeviceBlock;
 import com.drmangotea.tfmg.registry.TFMGBlockEntities;
 import com.drmangotea.tfmg.registry.TFMGSimulatedDevices;
 import com.george_vi.electroenergetics.devices.device.SimulatedDeviceType;

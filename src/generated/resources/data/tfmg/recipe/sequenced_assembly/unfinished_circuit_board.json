@@ -17,7 +17,7 @@
           "item": "tfmg:unfinished_circuit_board"
         },
         {
-          "item": "tfmg:capacitor"
+          "item": "electroenergetics:capacitor"
         }
       ],
       "results": [

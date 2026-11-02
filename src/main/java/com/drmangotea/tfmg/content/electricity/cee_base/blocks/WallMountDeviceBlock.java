@@ -1,7 +1,7 @@
-package com.drmangotea.tfmg.content.electricity.cee_base;
+package com.drmangotea.tfmg.content.electricity.cee_base.blocks;
 
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
-import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
+import com.drmangotea.tfmg.base.blocks.WallMountBlock;
 import com.george_vi.electroenergetics.devices.device.SimulatedDevice;
 import com.george_vi.electroenergetics.foundation.device.ElectricalDeviceBlock;
 import com.george_vi.electroenergetics.foundation.nodes.InWorldNodeConnection;
@@ -20,15 +20,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.ticks.LevelTickAccess;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
 @NothingNullByDefault
-public abstract class TFMGDeviceBlock<T extends SimulatedDevice, R extends BlockEntity> extends TFMGDirectionalBlock implements ElectricalDeviceBlock<T>, IBE<R>, IWrenchable {
-	public TFMGDeviceBlock(Properties properties) { super(properties); }
+public abstract class WallMountDeviceBlock<T extends SimulatedDevice, R extends BlockEntity> extends WallMountBlock implements ElectricalDeviceBlock<T>, IBE<R>, IWrenchable {
+	public WallMountDeviceBlock(Properties properties) { super(properties); }
 	
 	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
 		super.onPlace(state, level, pos, oldState, movedByPiston);

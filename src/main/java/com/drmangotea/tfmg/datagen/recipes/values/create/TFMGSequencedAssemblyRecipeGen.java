@@ -28,7 +28,7 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .transitionTo(TFMGItems.UNFINISHED_CIRCUIT_BOARD.get())
             .addOutput(TFMGItems.CIRCUIT_BOARD.get(), 1)
             .loops(4)
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.CAPACITOR))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(CEEBlocks.CAPACITOR))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(CEEBlocks.RESISTOR))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.TRANSISTOR))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(CEEBlocks.RESISTOR))
@@ -71,14 +71,7 @@ public class TFMGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(copperWire()))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.N_SEMICONDUCTOR))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.P_SEMICONDUCTOR))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.N_SEMICONDUCTOR))),
-    CAPACITOR = create("capacitor", b -> b.require(steelSheet())
-            .transitionTo(TFMGItems.UNFINISHED_CAPACITOR.get())
-            .addOutput(new ItemStack(TFMGItems.CAPACITOR.get(), 4), 1)
-            .loops(1)
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(copperSheet()))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.PAPER))
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(copperSheet())));
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(TFMGItems.N_SEMICONDUCTOR)));
 
     public TFMGSequencedAssemblyRecipeGen(PackOutput generator, CompletableFuture<HolderLookup.Provider> registries) {
         super(generator, registries,TFMG.MOD_ID);

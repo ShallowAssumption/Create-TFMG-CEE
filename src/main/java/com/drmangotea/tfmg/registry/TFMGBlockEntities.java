@@ -16,7 +16,6 @@ import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankBlockEntity;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankRenderer;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
-import com.drmangotea.tfmg.content.electricity.generators.creative_generator.CreativeGeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlockEntity;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbRenderer;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlockEntity;
@@ -313,12 +312,6 @@ public class TFMGBlockEntities {
     public static final BlockEntityEntry<BlastStoveBlockEntity> BLAST_STOVE = REGISTRATE
             .blockEntity("blast_stove", BlastStoveBlockEntity::new)
             .validBlocks(TFMGBlocks.BLAST_STOVE)
-            .register();
-
-
-    public static final BlockEntityEntry<CreativeGeneratorBlockEntity> CREATIVE_GENERATOR = REGISTRATE
-            .blockEntity("creative_generator", CreativeGeneratorBlockEntity::new)
-            .validBlocks(TFMGBlocks.CREATIVE_GENERATOR)
             .register();
 
     public static final BlockEntityEntry<TrafficLightBlockEntity> TRAFFIC_LIGHT = REGISTRATE
