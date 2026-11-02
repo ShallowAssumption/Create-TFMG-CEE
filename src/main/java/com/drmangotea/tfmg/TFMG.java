@@ -62,7 +62,7 @@ public class TFMG {
         TFMGEngineUpgrades.init();
         TFMGCableTypes.init();
         TFMGEngineTypes.init();
-        TFMGDisplaySources.init();
+        //TFMGDisplaySources.init();
         TFMGCreativeTabs.register(modEventBus);
         TFMGBlocks.init();
         TFMGPipes.init();
@@ -86,6 +86,7 @@ public class TFMG {
         TFMGFeatures.register(modEventBus);
         TFMGConditionCodecs.register(modEventBus);
         TFMGMountedStorageTypes.register();
+		TFMGSimulatedDevices.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(LevelDataHandler.instance);
 

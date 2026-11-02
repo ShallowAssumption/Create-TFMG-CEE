@@ -4,8 +4,6 @@ package com.drmangotea.tfmg.registry;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.spark.ElectricitySparkPacket;
 import com.drmangotea.tfmg.content.electricity.base.*;
-import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchPacket;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CablePlacePacket;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonPacket;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonPacket;
 import com.drmangotea.tfmg.content.machinery.metallurgy.coke_oven.CokeOvenPacket;
@@ -34,12 +32,10 @@ public enum TFMGPackets implements BasePacketPayload.PacketTypeProvider {
     DISTILLATION_PACKET(DistillationTowerPacket.class, DistillationTowerPacket.STREAM_CODEC),
     UPDATE_IN_FRONT_PACKET(UpdateInFrontPacket.class, UpdateInFrontPacket.STREAM_CODEC),
     //TRANSMISSION_REMOVE(TransmissionRemovePacket.class, TransmissionRemovePacket.STREAM_CODEC),
-    CABLE_PLACE_PACKET(CablePlacePacket.class, CablePlacePacket.STREAM_CODEC),
     ELECTRICITY_SPARK_EFFECT(ElectricitySparkPacket.class, ElectricitySparkPacket.STREAM_CODEC),
 
 
     // Client to Server
-    ELECTRICIANS_WRENCH_PACKET(ElectriciansWrenchPacket.class, ElectriciansWrenchPacket.STREAM_CODEC),
     //ENGINE_CONTROLLER_INPUT(EngineControllerInputPacket.class, EngineControllerInputPacket.STREAM_CODEC),
    // ENGINE_CONTROLLER_BIND(EngineControllerBindPacket.class, EngineControllerBindPacket::new, PLAY_TO_SERVER),
     //ENGINE_TRANSMISSION_PACKET(TransmissionShiftPacket.class, TransmissionShiftPacket.STREAM_CODEC),

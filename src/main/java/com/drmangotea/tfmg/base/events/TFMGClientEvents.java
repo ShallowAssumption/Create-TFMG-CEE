@@ -3,9 +3,7 @@ package com.drmangotea.tfmg.base.events;
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGClient;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterOverlayRenderer;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
 import com.drmangotea.tfmg.content.items.ScrewdriverItem;
 import com.drmangotea.tfmg.content.items.weapons.advanced_potato_cannon.AdvancedPotatoCannonItemRenderer;
 import com.drmangotea.tfmg.content.items.weapons.quad_potato_cannon.QuadPotatoCannonItemRenderer;
@@ -66,9 +64,6 @@ public class TFMGClientEvents {
 		TFMGClient.QUAD_POTATO_CANNON_RENDER_HANDLER.tick();
 		TFMGClient.ADVANCED_POTATO_CANNON_RENDER_HANDLER.tick();
 		TFMGClient.FLAMETHROWER_RENDER_HANDLER.tick();
-
-		TransformerBlockEntity.tickOutliner();
-		CableConnectorBlockEntity.tickOutliner();
 
 		ScrewdriverItem.clientTick();
 	}

@@ -13,7 +13,6 @@ import com.drmangotea.tfmg.content.decoration.doors.TFMGSlidingDoorBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.cogs.TFMGCogWheelBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelGearboxBlock;
-import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
 import com.drmangotea.tfmg.content.decoration.tanks.TFMGTankGenerator;
 import com.drmangotea.tfmg.content.decoration.tanks.aluminum.AluminumFluidTankModel;
 import com.drmangotea.tfmg.content.decoration.tanks.aluminum.AluminumTankBlock;
@@ -24,48 +23,21 @@ import com.drmangotea.tfmg.content.decoration.tanks.cast_iron.CastIronTankItem;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelFluidTankModel;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankItem;
-import com.drmangotea.tfmg.content.electricity.connection.CableHubBlock;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlock;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorGenerator;
-import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlock;
-import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlockModel;
-import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableBlock;
-import com.drmangotea.tfmg.content.electricity.connection.diagonal.DiagonalCableGenerator;
-import com.drmangotea.tfmg.content.electricity.connection.tube.CableTubeBlock;
-import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlock;
 import com.drmangotea.tfmg.content.electricity.generators.creative_generator.CreativeGeneratorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.RotorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorBlock;
-import com.drmangotea.tfmg.content.electricity.generators.large_generator.StatorGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LampGenerator;
 import com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
-import com.drmangotea.tfmg.content.electricity.measurement.VoltMeterBlock;
-import com.drmangotea.tfmg.content.electricity.network.diode.ElectricDiodeBlock;
-import com.drmangotea.tfmg.content.electricity.network.diode.EncasedDiodeBlock;
-import com.drmangotea.tfmg.content.electricity.network.electric_switch.ElectricSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlock;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchGenerator;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.EncasedPotentiometerBlock;
-import com.drmangotea.tfmg.content.electricity.network.potentiometer.PotentiometerBlock;
 import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeCoilBlock;
 import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeElectromagneticCoilItem;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlock;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerGenerator;
-import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorBlock;
 import com.drmangotea.tfmg.content.electricity.storage.AccumulatorItem;
 import com.drmangotea.tfmg.content.electricity.storage.CapacitorCTBehavior;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_motor.ElectricMotorBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.PolarizerBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorBlockItem;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayBlock;
 import com.drmangotea.tfmg.content.electricity.utilities.segmented_display.SegmentedDisplayCTBehavior;
 import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLightBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverBlock;
-import com.drmangotea.tfmg.content.electricity.utilities.voltage_observer.VoltageObserverGenerator;
 import com.drmangotea.tfmg.content.engines.base.EngineCTBehavior;
 import com.drmangotea.tfmg.content.engines.base.EngineGenerator;
 import com.drmangotea.tfmg.content.engines.engine_gearbox.EngineGearboxBlock;
@@ -124,18 +96,15 @@ import com.drmangotea.tfmg.content.machinery.vat.industrial_mixer.IndustrialMixe
 import com.drmangotea.tfmg.content.world.resevoir.OilDepositBlock;
 import com.drmangotea.tfmg.recipes.condition.TagFilledCondition;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.contraptions.bearing.StabilizedBearingMovementBehaviour;
 import com.simibubi.create.content.decoration.MetalLadderBlock;
 import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
 import com.simibubi.create.content.decoration.TrainTrapdoorBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
-import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.fluids.tank.FluidTankMovementBehavior;
 import com.simibubi.create.content.kinetics.gearbox.GearboxBlock;
-import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
 import com.simibubi.create.foundation.data.*;
@@ -147,7 +116,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ColorRGBA;
@@ -170,7 +138,6 @@ import static com.drmangotea.tfmg.TFMG.REGISTRATE;
 import static com.drmangotea.tfmg.base.TFMGBuilderTransformers.*;
 import static com.drmangotea.tfmg.content.electricity.lights.LightBulbBlock.LIGHT;
 import static com.drmangotea.tfmg.registry.TFMGTags.Items;
-import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
 import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
@@ -948,182 +915,6 @@ public class TFMGBlocks {
 
     //------------------ELECTRICITY------------------//
 
-    public static final BlockEntry<GeneratorBlock> GENERATOR =
-            REGISTRATE.block("generator", GeneratorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .transform(TFMGStress.setImpact(50.0f))
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .item()
-                    .properties(p -> p.component(TFMGDataComponents.ENGINE_UPGRADE, new EngineUpgrade.Stored(TFMGEngineUpgrades.GENERATOR)))
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<CableConnectorBlock> CABLE_CONNECTOR =
-            REGISTRATE.block("cable_connector", CableConnectorBlock::new)
-                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.TERRACOTTA)
-                    .transform(pickaxeOnly())
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CableConnectorGenerator()::generate)
-                    .lang("Cable Insulator")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<CableConnectorBlock> GLASS_CABLE_CONNECTOR =
-            REGISTRATE.block("glass_cable_insulator", CableConnectorBlock::new)
-                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.TERRACOTTA)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .addLayer(() -> RenderType::translucent)
-                    .blockstate(new CableConnectorGenerator()::generate)
-                    .lang("Glass Cable Insulator")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<ResistorBlock> RESISTOR =
-            REGISTRATE.block("resistor", ResistorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .item(ResistorBlockItem::new)
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<CopycatCableBlock> COPYCAT_CABLE_BLOCK =
-            REGISTRATE.block("copycat_cable_block", CopycatCableBlock::new)
-                    .transform(TFMGBuilderTransformers.copycatCable())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .onRegister(CreateRegistrate.blockModel(() -> CopycatCableBlockModel::new))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<Block> COPYCAT_CABLE_BASE = REGISTRATE.block("copycat_cable_base", Block::new)
-            .initialProperties(SharedProperties::softMetal)
-            .addLayer(() -> RenderType::cutoutMipped)
-            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
-            .transform(pickaxeOnly())
-            .blockstate((c, p) -> p.simpleBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
-            .register();
-    public static final BlockEntry<CableHubBlock> BRASS_CABLE_HUB =
-            REGISTRATE.block("brass_cable_hub", p -> new CableHubBlock(p, 50))
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .item()
-                    .build()
-                    .register();
-    public static final BlockEntry<CableHubBlock> COPPER_CABLE_HUB =
-            REGISTRATE.block("copper_cable_hub", p -> new CableHubBlock(p, 16))
-                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.COPPER_BLOCK)
-                    .properties(p -> p.sound(SoundType.COPPER))
-                    .transform(pickaxeOnly())
-                    .item()
-                    .build()
-                    .register();
-    public static final BlockEntry<CableHubBlock> STEEL_CABLE_HUB =
-            REGISTRATE.block("steel_cable_hub", p -> new CableHubBlock(p, 250))
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .item()
-                    .build()
-                    .register();
-    public static final BlockEntry<CableHubBlock> ALUMINUM_CABLE_HUB =
-            REGISTRATE.block("aluminum_cable_hub", p -> new CableHubBlock(p, 80, ALUMINUM_CASING::get))
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-					.onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.INDUSTRIAL_ALUMINUM_CASING)))
-                    .simpleItem()
-                    .register();
-    public static final BlockEntry<CableHubBlock> STEEL_CASING_CABLE_HUB =
-            REGISTRATE.block("steel_casing_cable_hub", p -> new CableHubBlock(p, 100, STEEL_CASING::get))
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-					.onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.STEEL_CASING)))
-                    .simpleItem()
-                    .register();
-    public static final BlockEntry<CableHubBlock> HEAVY_CABLE_HUB =
-            REGISTRATE.block("heavy_cable_hub", p -> new CableHubBlock(p, 100, HEAVY_MACHINERY_CASING::get))
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-					.onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, TFMGSpriteShifts.HEAVY_MACHINERY_CASING)))
-					.simpleItem()
-                    .register();
-
-    public static final BlockEntry<CableTubeBlock> CABLE_TUBE =
-            REGISTRATE.block("cable_tube", p -> new CableTubeBlock(p, false))
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.axisBlockProvider(false))
-                    .item()
-                    .build()
-                    .register();
-
-    public static final BlockEntry<CableTubeBlock> CONCRETE_ENCASED_CABLE_TUBE =
-            REGISTRATE.block("concrete_encased_cable_tube", p -> new CableTubeBlock(p, true))
-                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.STONE)
-                    .blockstate(BlockStateGen.axisBlockProvider(false))
-                    .transform(pickaxeOnly())
-                    .loot((lt, block) -> lt.dropOther(block, TFMGBlocks.CABLE_TUBE.get().asItem()))
-                    .register();
-
-    public static final BlockEntry<CableTubeBlock> ELECTRIC_POST =
-            REGISTRATE.block("electric_post", p -> new CableTubeBlock(p, false))
-                    .initialProperties(SharedProperties::softMetal)
-                    .blockstate(BlockStateGen.axisBlockProvider(false))
-                    .transform(pickaxeOnly())
-                    .item()
-                    .build()
-                    .register();
-
-    public static final BlockEntry<CableTubeBlock> CONCRETE_ENCASED_ELECTRIC_POST =
-            REGISTRATE.block("concrete_encased_electric_post", p -> new CableTubeBlock(p, true))
-                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.STONE)
-                    .blockstate(BlockStateGen.axisBlockProvider(false))
-                    .transform(pickaxeOnly())
-                    .loot((lt, block) -> lt.dropOther(block, TFMGBlocks.ELECTRIC_POST.get().asItem()))
-                    .register();
-
-    public static final BlockEntry<DiagonalCableBlock> DIAGONAL_CABLE_BLOCK =
-            REGISTRATE.block("diagonal_cable_block", DiagonalCableBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .blockstate(new DiagonalCableGenerator()::generate)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<ElectricMotorBlock> ELECTRIC_MOTOR =
-            REGISTRATE.block("electric_motor", ElectricMotorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CreativeMotorGenerator()::generate)
-                    .transform(TFMGStress.setCapacity(12))
-                    .onRegister(BlockStressValues.setGeneratorSpeed(64, true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<ElectricMotorBlock> HEAVY_ELECTRIC_MOTOR =
-            REGISTRATE.block("heavy_electric_motor", ElectricMotorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CreativeMotorGenerator()::generate)
-                    .transform(TFMGStress.setCapacity(100))
-                    .onRegister(BlockStressValues.setGeneratorSpeed(64, true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
     public static final BlockEntry<CreativeGeneratorBlock> CREATIVE_GENERATOR = REGISTRATE.block("creative_generator", CreativeGeneratorBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(BlockBehaviour.Properties::requiresCorrectToolForDrops)
@@ -1201,42 +992,6 @@ public class TFMGBlocks {
                     .transform(customItemModel())
                     .register();
 
-    public static final BlockEntry<ElectricDiodeBlock> DIODE =
-            REGISTRATE.block("electric_diode", ElectricDiodeBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CreativeMotorGenerator()::generate)
-                    .lang("Diode")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<EncasedDiodeBlock> ENCASED_DIODE =
-            REGISTRATE.block("encased_diode", EncasedDiodeBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .transform(EncasingRegistry.addVariantTo(DIODE))
-                    .blockstate(BlockStateGen.directionalBlockProvider(false))
-                    .register();
-
-    public static final BlockEntry<PotentiometerBlock> POTENTIOMETER =
-            REGISTRATE.block("potentiometer", PotentiometerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new CreativeMotorGenerator()::generate)
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<ElectricSwitchBlock> ELECTRICAL_SWITCH =
-            REGISTRATE.block("electrical_switch", ElectricSwitchBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .lang("Electric Switch")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
     public static final BlockEntry<LargeSwitchBlock> LARGE_SWITCH =
             REGISTRATE.block("large_switch", LargeSwitchBlock::new)
                     .initialProperties(SharedProperties::softMetal)
@@ -1248,74 +1003,6 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
-    public static final BlockEntry<EncasedPotentiometerBlock> ENCASED_POTENTIOMETER =
-            REGISTRATE.block("encased_potentiometer", EncasedPotentiometerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .transform(EncasingRegistry.addVariantTo(POTENTIOMETER))
-                    .blockstate(BlockStateGen.directionalBlockProvider(false))
-                    .register();
-    public static final BlockEntry<ElectricPumpBlock> ELECTRIC_PUMP =
-            REGISTRATE.block("electric_pump", ElectricPumpBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.directionalBlockProvider(true))
-                    .item().transform(customItemModel())
-					.recipe((ctx, prov) -> ShapedRecipeBuilder
-						.shaped(RecipeCategory.MISC, ctx.get())
-						.define('C', TFMGItems.CIRCUIT_BOARD)
-						.define('P', TFMGPipes.PIPES.get(TFMGPipes.PipeMaterial.STEEL).getPump())
-						.define('W', TFMGTags.Items.WIRES_COPPER.tag)
-						.define('Q', TFMGItems.CAPACITOR)
-						.define('K', TFMGItems.ELECTROMAGNETIC_COIL)
-						.define('M', TFMGItems.MAGNET)
-						.pattern("MQK")
-						.pattern("CPW")
-						.pattern("MQK")
-						.unlockedBy("has_board", RegistrateRecipeProvider.has(TFMGItems.CIRCUIT_BOARD))
-						.save(prov)
-					).register();
-    public static final BlockEntry<VoltageObserverBlock> VOLTAGE_OBSERVER =
-            REGISTRATE.block("voltage_observer", VoltageObserverBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new VoltageObserverGenerator()::generate)
-                    .transform(displaySource(TFMGDisplaySources.CURRENT))
-                    .transform(displaySource(TFMGDisplaySources.POWER_USAGE))
-                    .transform(displaySource(TFMGDisplaySources.RESISTANCE))
-                    .transform(displaySource(TFMGDisplaySources.VOLTAGE))
-                    .transform(displaySource(TFMGDisplaySources.POWER_GENERATION))
-                    .transform(displaySource(TFMGDisplaySources.VOLTAGE_GENERATION))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_CONSUMPTION))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_GENERATION))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_ID))
-                    .transform(displaySource(TFMGDisplaySources.NETWORK_RESISTANCE))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<VoltMeterBlock> VOLTMETER =
-            REGISTRATE.block("voltmeter", VoltMeterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .lang("Electric Gauge")
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<VoltMeterBlock> ELECTRIC_MEASUREMENT_BLOCK =
-            REGISTRATE.block("electric_measurement_block", VoltMeterBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
 
     public static final BlockEntry<PolarizerBlock> POLARIZER =
             REGISTRATE.block("polarizer", PolarizerBlock::new)
@@ -1324,27 +1011,6 @@ public class TFMGBlocks {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-    public static final BlockEntry<RotorBlock> ROTOR =
-            REGISTRATE.block("rotor", RotorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(BlockStateGen.axisBlockProvider(true))
-                    .transform(TFMGStress.setImpact(240))
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<StatorBlock> STATOR =
-            REGISTRATE.block("stator", StatorBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .blockstate(new StatorGenerator()::generate)
                     .item()
                     .transform(customItemModel())
                     .register();
@@ -1367,26 +1033,7 @@ public class TFMGBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
-
-    public static final BlockEntry<TransformerBlock> TRANSFORMER =
-            REGISTRATE.block("transformer", TransformerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .transform(pickaxeOnly())
-                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .item()
-                    .transform(customItemModel())
-                    .register();
-
-    public static final BlockEntry<LargeTransformerBlock> LARGE_TRANSFORMER =
-            REGISTRATE.block("large_transformer", LargeTransformerBlock::new)
-                    .initialProperties(SharedProperties::softMetal)
-                    .blockstate(new LargeTransformerGenerator()::generate)
-                    .properties(BlockBehaviour.Properties::noOcclusion)
-                    .tag(AllTags.AllBlockTags.NON_MOVABLE.tag)
-                    .transform(pickaxeOnly())
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .register();
+	
 
     public static final BlockEntry<LargeCoilBlock> LARGE_COIL =
             REGISTRATE.block("large_coil", LargeCoilBlock::new)

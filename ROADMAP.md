@@ -1,20 +1,20 @@
 # Roadmap
 Crossed out features are features that have been removed due to overlap, or lack of functionality, usually due to other removals.
 
-- [|] ~~Cables~~
+- [X] ~~Cables~~
 - [ ] Electronics
-  - [|] ~~Configuration Wrench~~
-  - [|] ~~Generators~~
-  - [|] ~~Electric Pump~~
-  - [|] ~~Electric Motor~~
-  - [|] ~~Electric Gauges~~
-  - [|] ~~Transformer~~
-  - [|] ~~Large Transformer~~
-  - [|] ~~Diode~~
-  - [|] ~~Electric Switch~~
-  - [|] ~~Potentiometer~~
-  - [|] ~~Resistor~~
-  - [|] ~~Voltage Observer~~
+  - [X] ~~Configuration Wrench~~
+  - [X] ~~Generators~~
+  - [X] ~~Electric Pump~~
+  - [X] ~~Electric Motor~~
+  - [X] ~~Electric Gauges~~
+  - [X] ~~Transformer~~
+  - [X] ~~Large Transformer~~
+  - [X] ~~Diode~~
+  - [X] ~~Electric Switch~~
+  - [X] ~~Potentiometer~~
+  - [X] ~~Resistor~~
+  - [X] ~~Voltage Observer~~
   - [ ] Lights
     - [|] ~~Light Bulb~~
     - [|] Circular Light

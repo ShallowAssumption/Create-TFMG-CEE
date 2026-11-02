@@ -6,7 +6,7 @@
       "tag": "c:plates/brass"
     },
     "G": {
-      "item": "tfmg:voltmeter"
+      "item": "electroenergetics:voltmeter"
     },
     "W": {
       "tag": "c:wires/copper"

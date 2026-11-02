@@ -538,14 +538,6 @@ public class TFMGRecipeProvider extends RecipeProvider {
             return CommonMetal.ZINC.nuggets;
         }
 
-        public static ItemStack resistor10Ohms(){
-            ItemStack stack = TFMGBlocks.RESISTOR.asStack();
-
-            stack.set(TFMGDataComponents.RESISTANCE,10);
-
-            return stack;
-        }
-
         public static ItemStack coil100Turns(){
             ItemStack stack = TFMGItems.ELECTROMAGNETIC_COIL.asStack();
             stack.set(TFMGDataComponents.COIL_TURNS, 100);

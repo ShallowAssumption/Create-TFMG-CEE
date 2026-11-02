@@ -33,7 +33,7 @@
           "item": "tfmg:unfinished_circuit_board"
         },
         {
-          "item": "tfmg:resistor"
+          "item": "electroenergetics:resistor"
         }
       ],
       "results": [
@@ -65,7 +65,7 @@
           "item": "tfmg:unfinished_circuit_board"
         },
         {
-          "item": "tfmg:resistor"
+          "item": "electroenergetics:resistor"
         }
       ],
       "results": [

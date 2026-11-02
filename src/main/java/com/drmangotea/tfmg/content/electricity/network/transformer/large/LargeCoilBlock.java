@@ -43,11 +43,6 @@ public class LargeCoilBlock extends Block implements IBE<LargeCoilBlockEntity> {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(stack.is(TFMGBlocks.LAMINATED_MAGNETIC_ALLOY_BLOCK.asItem())){
-            if(level.getBlockEntity(pos) instanceof LargeCoilBlockEntity be)
-                return be.createTransformer(player.getNearestViewDirection());
-
-        }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 

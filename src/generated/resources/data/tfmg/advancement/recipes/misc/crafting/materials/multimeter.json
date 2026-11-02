@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "tfmg:voltmeter"
+            "items": "electroenergetics:voltmeter"
           }
         ]
       },

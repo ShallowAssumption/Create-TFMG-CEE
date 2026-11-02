@@ -9,10 +9,13 @@ import com.drmangotea.tfmg.content.electricity.utilities.traffic_light.TrafficLi
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderDevice;
 import com.drmangotea.tfmg.content.machinery.vat.freezer.FreezerDevice;
 
+import com.george_vi.electroenergetics.devices.device.DevicesSavedData;
 import com.george_vi.electroenergetics.devices.device.SimulatedDevice;
 import com.george_vi.electroenergetics.devices.device.SimulatedDeviceFactory;
 import com.george_vi.electroenergetics.devices.device.SimulatedDeviceType;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,13 +27,13 @@ public class TFMGSimulatedDevices {
 		DEVICES = DeferredRegister.create(SIMULATED_DEVICE_TYPE_REGISTRY, TFMG.MOD_ID);
 	
 	public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<FreezerDevice>>
-		FREEZER = device("freezer", (t,l,p,sd) -> new FreezerDevice(l,p,sd,t));
+		FREEZER = device("freezer", FreezerDevice::new);
 	
 	public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<ElectrodeHolderDevice>>
-		ELECTRODE_HOLDER = device("electrode_holder", (t,l,p,sd) -> new ElectrodeHolderDevice(l,p,sd,t));
+		ELECTRODE_HOLDER = device("electrode_holder", ElectrodeHolderDevice::new);
 	
 	public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<TrafficLightDevice>>
-		TRAFFIC_LIGHT = device("traffic_light", (t,l,p,sd) -> new TrafficLightDevice(l,p,sd,t));
+		TRAFFIC_LIGHT = device("traffic_light", TrafficLightDevice::new);
 	
 	/*public static final DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<AccumulatorDevice>>
 		ACCUMULATOR = device("accumulator", AccumulatorDevice::new);
@@ -45,8 +48,17 @@ public class TFMGSimulatedDevices {
 		LARGE_SWITCH = device("large_switch", LargeSwitchDevice::new);*/
 	
 	static <T extends SimulatedDevice> DeferredHolder<SimulatedDeviceType<?>, SimulatedDeviceType<T>> device (
-		String name, SimulatedDeviceFactory<T> factory
+		String name, TFMGSimulatedDeviceFactory<T> factory
 	) { return DEVICES.register(name, () -> new SimulatedDeviceType<>(TFMG.asResource(name), factory)); }
 	
 	public static void register(IEventBus bus) { DEVICES.register(bus); }
+	
+	//Remove once registration in base CEE is fixed
+	private interface TFMGSimulatedDeviceFactory<T extends SimulatedDevice> extends SimulatedDeviceFactory<T> {
+		default T create(SimulatedDeviceType<T> var1, Level var2, BlockPos var3, DevicesSavedData var4) {
+			return create(var2, var3, var4, var1);
+		}
+		
+		T create(Level l, BlockPos p, DevicesSavedData sd, SimulatedDeviceType<T> t);
+	}
 }

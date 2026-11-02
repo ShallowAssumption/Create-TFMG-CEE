@@ -46,7 +46,6 @@ public class TFMGSableProvider extends BlockPhysicsProvider {
 		
 		add(TFMGBlocks.ALUMINUM_BLOCK.getDelegate(), b -> b.mass(0.5d));
 		add(TFMGBlocks.ALUMINUM_CASING.getDelegate(), b -> b.mass(0.5d));
-		add(TFMGBlocks.ALUMINUM_CABLE_HUB.getDelegate(), b -> b.mass(0.5d));
 		add(TFMGBlocks.ALUMINUM_BARS.getDelegate(), b -> b.mass(0.1d));
 		add(TFMGBlocks.ALUMINUM_DOOR.getDelegate(), b -> b.mass(0.1d)
 			.volume(shapeVolume(SlidingDoorShapes.get(Direction.NORTH, false, false)))

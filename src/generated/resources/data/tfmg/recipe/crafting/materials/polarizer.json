@@ -9,13 +9,13 @@
       "item": "tfmg:capacitor"
     },
     "R": {
-      "item": "tfmg:resistor"
+      "item": "electroenergetics:resistor"
     },
     "S": {
       "item": "tfmg:steel_casing"
     },
     "V": {
-      "item": "tfmg:voltmeter"
+      "item": "tfmg:heavy_machinery_casing"
     },
     "W": {
       "tag": "c:wires/copper"

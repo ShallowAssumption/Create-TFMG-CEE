@@ -9,6 +9,7 @@ import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.drmangotea.tfmg.registry.TFMGTags;
+import com.george_vi.electroenergetics.CEEBlocks;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -312,84 +313,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern(" R ")
                     .pattern(" R ")),
 
-
-    CABLE_TUBE = create(TFMGBlocks.CABLE_TUBE).returns(8)
-            .unlockedBy(TFMGItems.RUBBER_SHEET::get)
-            .viaShaped(b -> b
-                    .define('C', copperWire())
-                    .define('R', rubber())
-                    .define('N', steelNugget())
-                    .pattern(" N ")
-                    .pattern("CRC")
-                    .pattern(" N ")),
-
-    DIAGONAL_CABLE = create(TFMGBlocks.DIAGONAL_CABLE_BLOCK).returns(8)
-            .unlockedBy(TFMGItems.RUBBER_SHEET::get)
-            .viaShaped(b -> b
-                    .define('C', copperWire())
-                    .define('R', rubber())
-                    .define('N', steelNugget())
-                    .pattern(" C ")
-                    .pattern("CRN")
-                    .pattern(" N ")),
-
-    ELECTRIC_POST = create(TFMGBlocks.ELECTRIC_POST).returns(4)
-            .unlockedBy(TFMGItems.COPPER_WIRE::get)
-            .viaShaped(b -> b
-                    .define('C', copperWire())
-                    .define('R', steelIngot())
-                    .define('N', steelNugget())
-                    .pattern(" N ")
-                    .pattern("CRC")
-                    .pattern(" N ")),
-
-    CABLE_CONNECTOR = create(TFMGBlocks.CABLE_CONNECTOR)
-            .unlockedBy(TFMGItems.COPPER_WIRE::get)
-            .viaShaped(b -> b
-                    .define('C', TFMGItems.UNFINISHED_INSULATOR)
-                    .define('N', copperIngot())
-                    .define('O', steelNugget())
-                    .pattern("OOO")
-                    .pattern(" C ")
-                    .pattern(" N ")),
-
-    ELECTRICAL_SWITCH = create(TFMGBlocks.ELECTRICAL_SWITCH)
-            .unlockedBy(TFMGItems.COPPER_WIRE::get)
-            .viaShaped(b -> b
-                    .define('C', heavyMachineryCasing())
-                    .define('R', redstone())
-                    .define('L', leadSheet())
-                    .define('P', TFMGBlocks.ELECTRIC_POST)
-                    .pattern("RPR")
-                    .pattern("LCL")
-                    .pattern("RPR")),
-
-
-    LARGE_SWITCH = create(TFMGBlocks.LARGE_SWITCH)
-            .unlockedBy(TFMGBlocks.CABLE_CONNECTOR::get)
-            .viaShaped(b -> b
-                    .define('B', brassSheet())
-                    .define('R', rebar())
-                    .define('W', copperWire())
-                    .define('S', TFMGBlocks.STEEL_CABLE_HUB)
-                    .define('M', steelMechanism())
-                    .define('I', TFMGBlocks.CABLE_CONNECTOR)
-                    .define('P', TFMGBlocks.ELECTRIC_POST)
-                    .pattern("WRB")
-                    .pattern("SMP")
-                    .pattern("III")),
-
-   // FUSE_BLOCK = create(TFMGBlocks.FUSE_BLOCK)
-   //         .unlockedBy(TFMGItems.COPPER_WIRE::get)
-   //         .viaShaped(b -> b
-   //                 .define('C', heavyMachineryCasing())
-   //                 .define('W', copperWire())
-   //                 .define('R', aluminumSheet())
-   //                 .define('L', copperIngot())
-   //                 .pattern("RWR")
-   //                 .pattern("LCL")
-   //                 .pattern("RWR")),
-
     SEGMENTED_DISPLAY = create(TFMGBlocks.SEGMENTED_DISPLAY).returns(4)
             .unlockedBy(TFMGBlocks.ALUMINUM_CASING::get)
             .viaShaped(b -> b
@@ -422,16 +345,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern(" O ")
                     .pattern("GGG")
                     .pattern(" C ")),
-
-    GLASS_INSULATOR = create(TFMGBlocks.GLASS_CABLE_CONNECTOR)
-            .unlockedBy(TFMGItems.COPPER_WIRE::get)
-            .viaShaped(b -> b
-                    .define('I', TFMGItems.GLASS_INSULATOR_SEGMENT)
-                    .define('C', copperNugget())
-                    .define('O', steelNugget())
-                    .pattern("CIC")
-                    .pattern("OIO")
-                    .pattern("CIC")),
 
     STEEL_TRAPDOOR = create(TFMGBlocks.STEEL_TRAPDOOR)
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
@@ -517,26 +430,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern(" I ")
                     .pattern("   ")),
 
-    ELECTRIC_GAUGE = create(TFMGBlocks.VOLTMETER)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('M', magnet())
-                    .define('N', steelNugget())
-                    .define('A', steelIngot())
-                    .define('C', Items.COMPASS)
-                    .pattern("NNN")
-                    .pattern("NCN")
-                    .pattern("AMA")),
-
-    ELECTRIC_MEASUREMENT_BLOCK = create(TFMGBlocks.ELECTRIC_MEASUREMENT_BLOCK)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('M', heavyMachineryCasing())
-                    .define('V', TFMGBlocks.VOLTMETER)
-                    .pattern(" V ")
-                    .pattern(" M ")
-                    .pattern("   ")),
-
     DISTILLATION_CONTROLLER = create(TFMGBlocks.STEEL_DISTILLATION_CONTROLLER)
             .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
             .viaShaped(b -> b
@@ -549,18 +442,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("SPS")
                     .pattern("ECE")
                     .pattern("MHM")),
-
-    VOLTAGE_OBSERVER = create(TFMGBlocks.VOLTAGE_OBSERVER)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('R', redstone())
-                    .define('T', TFMGItems.TRANSISTOR)
-                    .define('Q', capacitor())
-                    .define('C', aluminumCasing())
-                    .pattern("TRT")
-                    .pattern("WCR")
-                    .pattern("QRQ")),
 
     LIGHT_BULB = create(TFMGBlocks.LIGHT_BULB).returns(2)
             .unlockedBy(TFMGItems.CONSTANTAN_INGOT::get)
@@ -690,17 +571,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern(" B ")
                     .pattern(" P ")),
 
-    CONFIGURATION_WRENCH = create(TFMGItems.CONFIGURATION_WRENCH)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('O', steelSheet())
-                    .define('A', aluminumSheet())
-                    .define('R', rebar())
-                    .define('C', TFMGBlocks.STEEL_COGWHEEL)
-                    .pattern("OA ")
-                    .pattern("OCA")
-                    .pattern(" R ")),
-
 	OIL_CAN = create(TFMGItems.OIL_CAN)
            .unlockedBy(TFMGItems.STEEL_NUGGET::get)
            .viaShaped(b -> b
@@ -773,9 +643,9 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
             .viaShaped(b -> b
                     .define('B', brassSheet())
                     .define('W', copperWire())
-                    .define('V', TFMGBlocks.VOLTMETER)
+                    .define('V', TFMGBlocks.HEAVY_MACHINERY_CASING) //TODO: Review
                     .define('S', steelCasing())
-                    .define('R', TFMGBlocks.RESISTOR)
+                    .define('R', CEEBlocks.RESISTOR) //TODO: Review
                     .define('C', capacitor())
                     .pattern("BWB")
                     .pattern("CVC")
@@ -822,17 +692,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("RCR")
                     .pattern("BBB")),
 
-    TRANSFORMER = create(TFMGBlocks.TRANSFORMER)
-            .unlockedBy(TFMGBlocks.STEEL_CASING::get)
-            .viaShaped(b -> b
-                    .define('C', steelCasing())
-                    .define('M', TFMGItems.MAGNETIC_ALLOY_SHEET)
-                    .define('N', nickelSheet())
-                    .define('W', copperWire())
-                    .pattern("MMM")
-                    .pattern("MNM")
-                    .pattern("WCW")),
-
     CONCRETE_HOSE = create(TFMGBlocks.CONCRETE_HOSE)
             .unlockedBy(TFMGBlocks.STEEL_CASING::get)
             .viaShaped(b -> b
@@ -869,80 +728,15 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("SBS")
                     .pattern("LCL")),
 
-   // CONVERTER = create(TFMGBlocks.CONVERTER)
-   //         .unlockedBy(TFMGBlocks.TRANSFORMER::get)
-   //         .viaShaped(b -> b
-   //                 .define('T', TFMGBlocks.TRANSFORMER)
-   //                 .define('R', redstone())
-   //                 .define('W', copperWire())
-   //                 .define('L', leadSheet())
-   //                 .pattern("WLR")
-   //                 .pattern("WTR")
-   //                 .pattern("WLR")),
-
-    MULTIMETER = create(TFMGItems.MULTIMETER)
-            .unlockedBy(TFMGBlocks.VOLTMETER::get)
+    MULTIMETER = create(TFMGItems.MULTIMETER) //TODO: Review
+            .unlockedBy(CEEBlocks.VOLTMETER::get)
             .viaShaped(b -> b
-                    .define('G', TFMGBlocks.VOLTMETER)
+                    .define('G', CEEBlocks.VOLTMETER)
                     .define('W', copperWire())
                     .define('B', brassSheet())
                     .pattern("BGB")
                     .pattern("BWB")
                     .pattern("BWB")),
-
-    COPPER_CABLE_HUB = create(TFMGBlocks.COPPER_CABLE_HUB).returns(2)
-            .unlockedBy(TFMGItems.MAGNET::get)
-            .viaShaped(b -> b
-                    .define('M', copperIngot())
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern("MMM")
-                    .pattern("WWW")),
-
-    BRASS_CABLE_HUB = create(TFMGBlocks.BRASS_CABLE_HUB).returns(2)
-            .unlockedBy(TFMGItems.MAGNET::get)
-            .viaShaped(b -> b
-                    .define('M', brassIngot())
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern("MMM")
-                    .pattern("WWW")),
-
-    ALUMINUM_CABLE_HUB = create(TFMGBlocks.ALUMINUM_CABLE_HUB).returns(2)
-            .unlockedBy(TFMGItems.MAGNET::get)
-            .viaShaped(b -> b
-                    .define('M', aluminumCasing())
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern("MMM")
-                    .pattern("WWW")),
-
-    STEEL_CABLE_HUB = create(TFMGBlocks.STEEL_CABLE_HUB).returns(2)
-            .unlockedBy(TFMGItems.MAGNET::get)
-            .viaShaped(b -> b
-                    .define('M', steelNugget())
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern("MMM")
-                    .pattern("WWW")),
-
-    STEEL_CASING_CABLE_HUB = create(TFMGBlocks.STEEL_CASING_CABLE_HUB).returns(2)
-            .unlockedBy(TFMGItems.MAGNET::get)
-            .viaShaped(b -> b
-                    .define('M', steelCasing())
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern(" M ")
-                    .pattern("WWW")),
-
-    HEAVY_CABLE_HUB = create(TFMGBlocks.HEAVY_CABLE_HUB).returns(2)
-            .unlockedBy(TFMGItems.MAGNET::get)
-            .viaShaped(b -> b
-                    .define('M', heavyMachineryCasing())
-                    .define('W', copperWire())
-                    .pattern("WWW")
-                    .pattern(" M ")
-                    .pattern("WWW")),
 
     FIREPROOF_BRICK = create(TFMGItems.FIREPROOF_BRICK::get)
             .viaCooking(() -> TFMGItems.FIRECLAY_BALL)
@@ -1259,24 +1053,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("BAB")
                     .pattern("BAB")),
 
-    RESISTOR = create(TFMGItems.UNFINISHED_RESISTOR)
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('P', plasticSheet())
-                    .pattern(" W ")
-                    .pattern(" P ")
-                    .pattern(" W ")),
-
-    RESISTOR_FROM_SLIME = create(TFMGItems.UNFINISHED_RESISTOR).withSuffix("from_slime")
-            .unlockedBy(TFMGItems.ALUMINUM_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('P', Items.SLIME_BALL)
-                    .pattern(" W ")
-                    .pattern(" P ")
-                    .pattern(" W ")),
-
     MIXER_BLADE = create(TFMGItems.MIXER_BLADE)
             .unlockedBy(TFMGItems.HEAVY_PLATE::get)
             .viaShaped(b -> b
@@ -1346,15 +1122,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("BPB")
                     .pattern("BPB")
                     .pattern("BPB")),
-
-    COPYCAT_CABLE = create(TFMGBlocks.COPYCAT_CABLE_BLOCK).returns(4)
-            .unlockedBy(TFMGItems.NICKEL_INGOT::get)
-            .viaShaped(b -> b
-                    .define('N', nickelTruss())
-                    .define('W', copperWire())
-                    .pattern("NWN")
-                    .pattern("WNW")
-                    .pattern("NWN")),
 
     BLAST_FURNACE_REINFORCEMENT = create(TFMGBlocks.BLAST_FURNACE_REINFORCEMENT).returns(4)
             .unlockedBy(TFMGItems.STEEL_INGOT::get)
@@ -1477,19 +1244,6 @@ public class TFMGStandardRecipeGen extends TFMGRecipeProvider {
                     .pattern("CBR")
                     .pattern("PBO")
                     .pattern("NBG")),
-
-    DIODE = create(TFMGBlocks.DIODE)
-            .unlockedBy(TFMGItems.SILICON_INGOT::get)
-            .viaShaped(b -> b
-                    .define('W', copperWire())
-                    .define('I', AllBlocks.INDUSTRIAL_IRON_BLOCK)
-                    .define('P', heavyMachineryCasing())
-                    .define('B', castIronSheet())
-                    .define('S', TFMGItems.P_SEMICONDUCTOR)
-                    .define('N', TFMGItems.N_SEMICONDUCTOR)
-                    .pattern("WBW")
-                    .pattern("SPN")
-                    .pattern("WIW")),
 
     BLAST_STOVE = create(TFMGBlocks.BLAST_STOVE).returns(2)
             .unlockedBy(TFMGItems.FIREPROOF_BRICK::get)

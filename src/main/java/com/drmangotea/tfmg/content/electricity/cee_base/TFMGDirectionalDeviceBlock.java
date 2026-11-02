@@ -1,5 +1,6 @@
 package com.drmangotea.tfmg.content.electricity.cee_base;
 
+import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.blocks.TFMGDirectionalBlock;
 import com.george_vi.electroenergetics.devices.device.SimulatedDevice;
 import com.george_vi.electroenergetics.foundation.device.ElectricalDeviceBlock;
@@ -19,16 +20,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.ticks.LevelTickAccess;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
+@NothingNullByDefault
 public abstract class TFMGDirectionalDeviceBlock<T extends SimulatedDevice, R extends BlockEntity> extends TFMGDirectionalBlock implements ElectricalDeviceBlock<T>, IBE<R>, IWrenchable {
 	public TFMGDirectionalDeviceBlock(Properties properties) { super(properties); }
 	
-	@ParametersAreNonnullByDefault
 	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
 		super.onPlace(state, level, pos, oldState, movedByPiston);
 		LevelTickAccess<Block> blockTicks = level.getBlockTicks();
@@ -37,7 +36,6 @@ public abstract class TFMGDirectionalDeviceBlock<T extends SimulatedDevice, R ex
 		}
 	}
 	
-	@ParametersAreNonnullByDefault
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		List<Integer> nodes = new ArrayList<>(this.getNodePositions(level, pos, state).keySet());
 		InfrastructureSavedData sd = InfrastructureSavedData.load(level);
@@ -45,8 +43,7 @@ public abstract class TFMGDirectionalDeviceBlock<T extends SimulatedDevice, R ex
 		super.tick(state, level, pos, random);
 	}
 	
-	@ParametersAreNonnullByDefault
-	public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
 		if (level instanceof ServerLevel sl && player.isCreative()) {
 			InfrastructureSavedData sd = InfrastructureSavedData.load(sl);
 			for(InWorldNodeData nodeData : sd.getNodesAt(pos)) {

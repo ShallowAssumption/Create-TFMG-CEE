@@ -5,7 +5,6 @@ import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlock;
 import com.drmangotea.tfmg.content.decoration.tanks.steel.SteelTankBlockEntity;
 import com.drmangotea.tfmg.content.electricity.base.IElectric;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -32,10 +31,6 @@ public class DebugCinderBlockItem extends Item {
         Level level = context.getLevel();
 		Player player = context.getPlayer();
 		BlockEntity blockEntity = level.getBlockEntity(pos);
-		
-		if (blockEntity instanceof CableConnectorBlockEntity be) {
-			TFMG.LOGGER.info("{}:\n {}", pos, be.connections);
-		}
 
         if (player != null && blockEntity instanceof IElectric be) {
 			if(player.isCrouching()){

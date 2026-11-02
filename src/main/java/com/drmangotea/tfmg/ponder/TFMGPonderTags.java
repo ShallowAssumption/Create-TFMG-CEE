@@ -46,9 +46,9 @@ public class TFMGPonderTags {
                 .title("Metallurgy")
                 .description("Blocks related to processing metal")
                 .register();
-        helper.registerTag(ELECTRIC_MACHINERY)
+        helper.registerTag(ELECTRIC_MACHINERY) //TODO: Move electric devices to CEE ponder tag
                 .addToIndex()
-                .item(TFMGBlocks.ROTOR, true, true)
+                .item(TFMGItems.MULTIMETER, true, true)
                 .title("Electric Machinery")
                 .description("Block which use, produce or transfer electricity")
                 .register();
@@ -103,22 +103,9 @@ public class TFMGPonderTags {
                 .add(TFMGBlocks.CASTING_BASIN);
 
         HELPER.addToTag(ELECTRIC_MACHINERY)
-                .add(TFMGBlocks.ROTOR)
-                .add(TFMGBlocks.STATOR)
-                .add(TFMGBlocks.GENERATOR)
-                .add(TFMGBlocks.ELECTRIC_MOTOR)
-                .add(TFMGBlocks.CABLE_CONNECTOR)
-                .add(TFMGBlocks.GLASS_CABLE_CONNECTOR)
                 .add(TFMGBlocks.POLARIZER)
                 .add(TFMGBlocks.ACCUMULATOR)
-                .add(TFMGBlocks.TRANSFORMER)
-                .add(TFMGBlocks.LARGE_COIL)
-                .add(TFMGBlocks.ELECTRICAL_SWITCH)
-                .add(TFMGBlocks.DIODE)
-                .add(TFMGBlocks.POTENTIOMETER)
-                .add(TFMGBlocks.ELECTRIC_PUMP)
                 .add(TFMGBlocks.LIGHT_BULB)
-                .add(TFMGBlocks.BRASS_CABLE_HUB)
                 .add(TFMGBlocks.SEGMENTED_DISPLAY)
               //  .add(TFMGBlocks.CONVERTER)
                 .add(TFMGBlocks.TRAFFIC_LIGHT)

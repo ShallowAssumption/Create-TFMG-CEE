@@ -12,7 +12,6 @@ import com.drmangotea.tfmg.content.decoration.kinetics.cogs.TFMGCogwheelBlockIte
 import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedCogwheelBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.encased.TFMGEncasedShaftBlock;
 import com.drmangotea.tfmg.content.decoration.kinetics.flywheels.TFMGFlywheelBlock;
-import com.drmangotea.tfmg.content.electricity.connection.copycat_cable.CopycatCableBlock;
 import com.drmangotea.tfmg.content.electricity.lights.neon_tube.NeonTubeBlock;
 import com.drmangotea.tfmg.recipes.condition.TagFilledCondition;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
@@ -189,20 +188,6 @@ public class TFMGBuilderTransformers {
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .transform(TFMGStress.setNoImpact())
                 .loot((p, lb) -> p.dropOther(lb, drop.get()));
-    }
-
-    public static <B extends CopycatCableBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> copycatCable() {
-        return b -> b.initialProperties(SharedProperties::softMetal)
-                .blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
-                        .getExistingFile(p.mcLoc("air"))))
-                .initialProperties(SharedProperties::softMetal)
-                .properties(BlockBehaviour.Properties::noOcclusion)
-                .addLayer(() -> RenderType::solid)
-                .addLayer(() -> RenderType::cutout)
-                .addLayer(() -> RenderType::cutoutMipped)
-                // .addLayer(() -> RenderType::translucent)
-                .color(() -> CopycatCableBlock::wrappedColor)
-                .transform(TagGen.axeOrPickaxe());
     }
 
     /// ////////////

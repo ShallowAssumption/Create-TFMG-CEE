@@ -42,11 +42,11 @@ public class TFMGRegistries {
     public static final Registry<MixerMode> MIXER_MODE_REGISTRY = makeSyncedRegistry(MIXER_MODE);
     public static final Registry<VatType> VAT_TYPE_REGISTRY = makeSyncedRegistry(VAT_TYPE);
     public static final Registry<EngineUpgrade> ENGINE_UPGRADE_REGISTRY = makeSyncedRegistry(ENGINE_UPGRADE);
-	public static final Registry<SimulatedDeviceType<?>> SIMULATED_DEVICE_TYPE_REGISTRY = new RegistryBuilder<>(SIMULATED_DEVICE_TYPE)
+	public static final Registry<SimulatedDeviceType<?>> SIMULATED_DEVICE_TYPE_REGISTRY = init(new RegistryBuilder<>(SIMULATED_DEVICE_TYPE)
 		.sync(false)
 		.onAdd(((registry, id, key, value) -> {for (Block block : value.validBlocks()) {
 			SimulatedDeviceType.BY_BLOCK.put(block, value);
-		}})).create();
+		}})).create());
 
 
     private static <T> ResourceKey<Registry<T>> createRegistryKey(String name) {
@@ -54,14 +54,15 @@ public class TFMGRegistries {
     }
 
     private static <T> Registry<T> makeSyncedRegistry(ResourceKey<Registry<T>> registryKey) {
-        var registry = new RegistryBuilder<>(registryKey).sync(true).create();
-        FOR_INIT.add(registry);
-        return registry;
+    	return init(new RegistryBuilder<>(registryKey).sync(true).create());
     }
 
     private static <T> Registry<T> makeRegistry(ResourceKey<Registry<T>> registryKey) {
-        var registry = new RegistryBuilder<>(registryKey).create();
-        FOR_INIT.add(registry);
-        return registry;
+		return init(new RegistryBuilder<>(registryKey).create());
     }
+	
+	private static <T> Registry<T> init(Registry<T> registry) {
+		FOR_INIT.add(registry);
+		return registry;
+	}
 }

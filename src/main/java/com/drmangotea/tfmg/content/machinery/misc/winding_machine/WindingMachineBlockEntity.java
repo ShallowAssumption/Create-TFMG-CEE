@@ -144,8 +144,7 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
         return stack.has(TFMGDataComponents.COIL_TURNS)
                 || stack.has(TFMGDataComponents.SPOOL_AMOUNT)
                 || stack.is(TFMGItems.ELECTROMAGNETIC_COIL)
-                || stack.is(TFMGBlocks.LARGE_COIL.asItem())
-                || stack.is(TFMGBlocks.RESISTOR.asItem());
+                || stack.is(TFMGBlocks.LARGE_COIL.asItem());
     }
 
     protected void depleteSpool() {
@@ -278,9 +277,6 @@ public class WindingMachineBlockEntity extends KineticBlockEntity implements IHa
         if (input.is(TFMGItems.ELECTROMAGNETIC_COIL.get()) || input.is(TFMGBlocks.LARGE_COIL.get().asItem())) {
             specialRecipeSpool = TFMGItems.COPPER_SPOOL.get();
             specialRecipeComponent = TFMGDataComponents.COIL_TURNS;
-        } else if (input.is(TFMGBlocks.RESISTOR.asItem())) {
-            specialRecipeSpool = TFMGItems.CONSTANTAN_SPOOL.get();
-            specialRecipeComponent = TFMGDataComponents.RESISTANCE;
         }
         
         if (specialRecipeSpool != null && getSpool().is(specialRecipeSpool)) {

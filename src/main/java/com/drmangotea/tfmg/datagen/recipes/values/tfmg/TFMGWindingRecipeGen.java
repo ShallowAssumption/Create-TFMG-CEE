@@ -16,23 +16,16 @@ import static com.drmangotea.tfmg.datagen.recipes.TFMGRecipeProvider.I.*;
 public class TFMGWindingRecipeGen extends WindingRecipeGen {
 
     GeneratedRecipe
-
-
-            ELECTROMAGNETIC_COIL = create("electromagnetic_coil", b -> b
+		ELECTROMAGNETIC_COIL = create("electromagnetic_coil", b -> b
             .require(TFMGItems.UNFINISHED_ELECTROMAGNETIC_COIL)
             .require(TFMGItems.COPPER_SPOOL)
             .output(coil100Turns())
             .duration(100)),
-            LARGE_COIL = create("large_coil", b -> b
-                    .require(TFMGBlocks.LAMINATED_MAGNETIC_ALLOY_BLOCK)
-                    .require(TFMGItems.COPPER_SPOOL)
-                    .output(largeCoil100Turns())
-                    .duration(100)),
-            RESISTOR = create("resistor", b -> b
-                    .require(TFMGItems.UNFINISHED_RESISTOR)
-                    .require(TFMGItems.CONSTANTAN_SPOOL)
-                    .output(resistor10Ohms())
-                    .duration(50));
+		LARGE_COIL = create("large_coil", b -> b
+			.require(TFMGBlocks.LAMINATED_MAGNETIC_ALLOY_BLOCK)
+			.require(TFMGItems.COPPER_SPOOL)
+			.output(largeCoil100Turns())
+			.duration(100));
 
     public TFMGWindingRecipeGen(PackOutput generator, CompletableFuture<HolderLookup.Provider> registries) {
         super(generator, registries, TFMG.MOD_ID);

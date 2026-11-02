@@ -7,11 +7,9 @@ import com.drmangotea.tfmg.base.debug.DebugCinderBlockItem;
 import com.drmangotea.tfmg.base.dyes.DyedItemList;
 import com.drmangotea.tfmg.content.decoration.kinetics.gearbox.SteelVerticalGearboxItem;
 import com.drmangotea.tfmg.content.decoration.pipes.TFMGPipes;
-import com.drmangotea.tfmg.content.electricity.configuration_wrench.ElectriciansWrenchItem;
 import com.drmangotea.tfmg.content.electricity.measurement.MultimeterItem;
 import com.drmangotea.tfmg.content.electricity.network.transformer.small.ElectromagneticCoilItem;
 import com.drmangotea.tfmg.content.electricity.utilities.polarizer.MagnetItem;
-import com.drmangotea.tfmg.content.electricity.utilities.resistor.ResistorItem;
 import com.drmangotea.tfmg.content.engines.fuels.EngineFuelType;
 import com.drmangotea.tfmg.content.engines.upgrades.base.EngineUpgrade;
 import com.drmangotea.tfmg.content.items.FluidContainingItem;
@@ -189,9 +187,6 @@ public class TFMGItems {
 	
     public static final ItemEntry<MagnetItem>
             MAGNET = REGISTRATE.item("magnet", MagnetItem::new).register();
-
-    public static final ItemEntry<ResistorItem>
-            UNFINISHED_RESISTOR = REGISTRATE.item("unfinished_resistor", ResistorItem::new).register();
 	
     public static final ItemEntry<SpoolItem>
 		EMPTY_SPOOL = spoolItem("empty", 0x000000)
@@ -345,11 +340,6 @@ public class TFMGItems {
             COOLING_FLUID_BOTTLE = REGISTRATE.item("cooling_fluid_bottle", p -> new FluidContainingItem(p, (s) -> s.is(TFMGTags.Fluids.COOLING_FLUID.tag)))
                     .properties(p -> p.stacksTo(1))
                     .register();
-	
-    public static final ItemEntry<ElectriciansWrenchItem>
-            CONFIGURATION_WRENCH = REGISTRATE.item("electricians_wrench", ElectriciansWrenchItem::new)
-            .lang("Configuration Wrench")
-            .register();
 
     public static final ItemEntry<ThermiteGrenadeItem>
             THERMITE_GRENADE = thermiteGrenade("thermite_grenade", BASE);

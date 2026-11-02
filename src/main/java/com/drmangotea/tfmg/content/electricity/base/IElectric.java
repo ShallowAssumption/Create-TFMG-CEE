@@ -4,11 +4,7 @@ import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
 import com.drmangotea.tfmg.base.lang.TFMGTexts;
-import com.drmangotea.tfmg.content.electricity.connection.CableHubBlockEntity;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.network.large_switch.LargeSwitchBlockEntity;
-import com.drmangotea.tfmg.content.electricity.network.transformer.large.LargeTransformerBlockEntity;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -299,24 +295,6 @@ public interface IElectric extends IHaveMultimeterInformation {
 
 
         BlockPos pos = getPos();
-        if (this instanceof CableConnectorBlockEntity be) {
-            for (CableConnection connection : be.connections) {
-                if (getLevelAccessor().getBlockEntity(connection.pos1().equals(getPos()) ? connection.pos2() : connection.pos1()) instanceof CableConnectorBlockEntity otherBe) {
-
-                    if (!otherBe.destroyed()) {
-                        if (!getOrCreateElectricNetwork().members.contains(otherBe))
-                            getOrCreateElectricNetwork().members.add(otherBe);
-                        if (otherBe.getData().getId() != getData().getId()) {
-                            otherBe.setNetwork(getData().getId());
-                            otherBe.onConnected();
-                            if (!getLevelAccessor().isClientSide())
-                                sendStuff();
-                        }
-                    }
-
-                }
-            }
-        }
         for (Direction d : Direction.values()) {
             if (hasElectricitySlot(d))
                 if (getLevelAccessor().getBlockEntity(pos.relative(d)) instanceof IElectric be) {
@@ -346,14 +324,6 @@ public interface IElectric extends IHaveMultimeterInformation {
     default void updateUnpowered(List<BlockPos> alreadyChecked) {
         alreadyChecked.add(getPos());
         updateNextTick();
-
-        if (this instanceof CableConnectorBlockEntity connectorBE) {
-            for (CableConnection connection : connectorBE.connections) {
-                if (getLevelAccessor().getBlockEntity(connection.pos1().equals(getPos()) ? connection.pos2() : connection.pos1()) instanceof CableConnectorBlockEntity be2 && !alreadyChecked.contains(be2.getBlockPos())) {
-                    be2.updateUnpowered(alreadyChecked);
-                }
-            }
-        }
 
         for (Direction direction : Direction.values()) {
             if (getLevelAccessor().getBlockEntity(getPos().relative(direction)) instanceof IElectric be && !alreadyChecked.contains(be.getPos())) {
@@ -388,7 +358,7 @@ public interface IElectric extends IHaveMultimeterInformation {
         }
 
         // Display Resistance, Voltage and Current
-        if (resistance() != 0&&!(this instanceof CableConnectorBlockEntity)&&!(this instanceof CableHubBlockEntity))
+        if (resistance() != 0)
             TFMGTexts.Multimeter.resistance(voltageGeneration() > 0 ? getGeneratorResistance() : resistance()).forGoggles(tooltip, 1);
         TFMGTexts.Multimeter.voltage(getData().getVoltage()).forGoggles(tooltip, 1);
         TFMGTexts.Multimeter.current(resistance() == 0 ? getData().highestCurrent : getCurrent()).forGoggles(tooltip, 1);
@@ -514,10 +484,6 @@ public interface IElectric extends IHaveMultimeterInformation {
                     count++;
             }
             if (member instanceof LargeSwitchBlockEntity be && be.getControlledBlock() != null) {
-                if (be.getControlledBlock().getData().getId() == id)
-                    count++;
-            }
-            if (member instanceof LargeTransformerBlockEntity be && be.getControlledBlock() != null) {
                 if (be.getControlledBlock().getData().getId() == id)
                     count++;
             }

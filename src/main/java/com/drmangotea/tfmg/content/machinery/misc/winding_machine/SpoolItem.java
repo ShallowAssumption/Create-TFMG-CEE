@@ -2,18 +2,13 @@ package com.drmangotea.tfmg.content.machinery.misc.winding_machine;
 
 import com.drmangotea.tfmg.TFMG;
 import com.drmangotea.tfmg.TFMGRegistries;
-import com.drmangotea.tfmg.base.TFMGUtils;
 import com.drmangotea.tfmg.base.annotation.NothingNullByDefault;
 import com.drmangotea.tfmg.base.lang.TFMGLang;
-import com.drmangotea.tfmg.content.electricity.connection.cable_type.CableType;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnection;
-import com.drmangotea.tfmg.content.electricity.connection.cables.CableConnectorBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -26,14 +21,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 import java.util.Objects;
-
-import static com.drmangotea.tfmg.base.blocks.WallMountBlock.FACING;
 
 @NothingNullByDefault
 public class SpoolItem extends Item {
@@ -67,8 +59,6 @@ public class SpoolItem extends Item {
             BlockPos pos = stack.getOrDefault(TFMGDataComponents.POSITION, fallback);
             if (pos == fallback)
                 return InteractionResultHolder.pass(stack);
-            if (level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be)
-                be.player = null;
             stack.remove(TFMGDataComponents.POSITION);
             if (level.isClientSide)
                 player.displayClientMessage(
@@ -100,13 +90,6 @@ public class SpoolItem extends Item {
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
 
-        BlockPos fallback = new BlockPos(0, level.getMaxBuildHeight() + 1, 0); // Impossible block position, better than 0,0,0
-        BlockPos posToConnect = stack.getOrDefault(TFMGDataComponents.POSITION, fallback);
-
-        BlockState state = level.getBlockState(pos);
-
-        Direction direction = state.hasProperty(FACING) ? state.getValue(FACING) : null;
-
         if (player == null)
             return InteractionResult.PASS;
 
@@ -129,76 +112,6 @@ public class SpoolItem extends Item {
         if (!level.isClientSide) {
             if (Objects.equals(cableTypeKey, TFMG.asResource("empty")))
                 return InteractionResult.PASS;
-            for (int i = 0; i < 64; i++) {
-                if (direction != null && level.getBlockEntity(pos.relative(direction)) instanceof CableConnectorBlockEntity) {
-                    pos = pos.relative(direction);
-                } else break;
-            }
-        }
-
-        if (level.getBlockEntity(pos) instanceof CableConnectorBlockEntity be) {
-            if (stack.has(TFMGDataComponents.POSITION)) {
-                if (posToConnect.equals(pos)) {
-                    stack.remove(TFMGDataComponents.POSITION);
-                    if (level.isClientSide)
-                        player.displayClientMessage(TFMGLang.translateDirect("wires.cant_connect_itself")
-                                .withStyle(ChatFormatting.YELLOW), true);
-                    be.player = null;
-                    be.sendData();
-                    be.setChanged();
-                    return InteractionResult.SUCCESS;
-                }
-                for (int i = 0; i < 64; i++) {
-                    if (direction != null && level.getBlockEntity(posToConnect.relative(direction)) instanceof CableConnectorBlockEntity) {
-                        posToConnect = posToConnect.relative(direction);
-                    } else break;
-                }
-                if (level.getBlockEntity(posToConnect) instanceof CableConnectorBlockEntity otherBE) {
-                    CableType cableType = TFMGUtils.getCableType(cableTypeKey);
-
-                    CableConnection connection1 = new CableConnection(otherBE.getBlockPos(),be.getBlockPos(), cableType, true);
-                    CableConnection connection2 = new CableConnection(be.getBlockPos(),otherBE.getBlockPos(), cableType, false);
-
-                    double distance = otherBE.getBlockPos().distManhattan(be.getBlockPos());
-                    int turnsLeft = stack.getOrDefault(TFMGDataComponents.SPOOL_AMOUNT, 0);
-					int amount = Math.round((float)(distance / 4)*80);
-                    if (turnsLeft < amount) { return InteractionResult.PASS; }
-                    if (be.connections.contains(connection1) || otherBE.connections.contains(connection2)) {
-						if (level.isClientSide)
-                            player.displayClientMessage(TFMGLang.translateDirect("wires.connection_already_created")
-                                    .withStyle(ChatFormatting.YELLOW), true);
-                        be.player = null;
-                        be.sendData();
-                        be.setChanged();
-                        return InteractionResult.SUCCESS;
-                    }
-                    be.connections.add(connection1);
-                    otherBE.connections.add(connection2);
-
-                    stack.set(TFMGDataComponents.SPOOL_AMOUNT, turnsLeft - amount);
-                    be.player = null;
-                    otherBE.player = null;
-                    be.onConnected();
-                    otherBE.onConnected();
-                    be.updateConnections();
-                    otherBE.updateConnections();
-                    stack.remove(TFMGDataComponents.POSITION);
-                }
-                //
-                be.player = null;
-                if (!level.isClientSide()) {
-                    be.data.connectNextTick = true;
-                }
-            } else {
-                stack.set(TFMGDataComponents.POSITION, be.getBlockPos());
-                be.player = player;
-                be.color = barColor;
-                be.sendData();
-                be.setChanged();
-                if (!level.isClientSide())
-                    be.onPlaced();
-            }
-            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
